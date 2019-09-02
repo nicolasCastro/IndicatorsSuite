@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dot_height">5dp</dimen>
+    <dimen name="dot_width">5dp</dimen>
+    <dimen name="dot_width_select">13dp</dimen>
+
+    <dimen name="dot_standard_size">10dp</dimen>
+    <dimen name="dot_minimum_size">1dp</dimen>
+
+    <dimen name="dot_padding">8dp</dimen>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DotsView">
+        <attr name="dotUnselectedColor" format="color"/>
+        <attr name="dotSelectedColor" format="color"/>
+        <attr name="dotWidth" format="dimension"/>
+        <attr name="dotSelectedWidth" format="dimension"/>
+        <attr name="dotHeight" format="dimension"/>
+        <attr name="dotMargin" format="dimension"/>
+        <attr name="animationDuration" format="integer"/>
+    </declare-styleable>
+</resources>

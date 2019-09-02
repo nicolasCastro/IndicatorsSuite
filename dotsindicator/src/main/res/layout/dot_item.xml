@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/mainItemView"
+      android:layout_width="@dimen/dot_width"
+      android:layout_height="@dimen/dot_height"
+      android:layout_margin="@dimen/dot_width"
+      android:gravity="center"
+      android:background="@drawable/bg_item_selected"
+      android:orientation="horizontal"/>
