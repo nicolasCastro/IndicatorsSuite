@@ -67,8 +67,8 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
 
         val anim = ValueAnimator.ofInt(fromScaleX.toInt(), toScaleX.toInt())
         anim.addUpdateListener { valueAnimator ->
-            val `val` = valueAnimator.animatedValue as Int
-            scale(`val`)
+            val value = valueAnimator.animatedValue as Int
+            scale(value)
         }
         anim.addListener(object : AnimatorListenerAdapter() {
         })
