@@ -55,6 +55,14 @@ class DotsView(context: Context, attrs: AttributeSet) :
         }
     }
 
+    fun selectIndex(index: Int) {
+        if (tabItems.size > index) {
+            tabItems[currentSelectedIndex].setItemDeselected()
+            currentSelectedIndex = index
+            tabItems[currentSelectedIndex].setItemSelected()
+        }
+    }
+
     private fun restoreView(currentIndex: Int) {
         this.tabItems = ArrayList()
         this.currentSelectedIndex = currentIndex
