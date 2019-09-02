@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.dots_scroll_control.view.*
 import java.util.*
 
@@ -37,6 +38,21 @@ class DotsView(context: Context, attrs: AttributeSet) :
         visibility = View.VISIBLE
         scrollView.visibility = View.VISIBLE
         tabItems[currentSelectedIndex].setItemSelected()
+    }
+
+    fun attach(view: RecyclerView) {
+        loadItems(view.adapter?.itemCount ?: 0, 0)
+        view.adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                loadItems(view.adapter?.itemCount ?: 0, 0)
+            }
+        })
+        view.addItemDecoration(object : DotsItemDecoration() {
+            override fun select(index: Int) {
+                selectIndex(index)
+            }
+        })
     }
 
     fun next() {
