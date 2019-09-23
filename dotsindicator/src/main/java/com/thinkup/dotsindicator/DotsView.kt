@@ -15,8 +15,8 @@ class DotsView(context: Context, attrs: AttributeSet) :
 
     private var tabItems = mutableListOf<DotTabItem>()
     private var currentSelectedIndex: Int = 0
-    private var tabClick: OnTabClick? = null
     private val config: DotConfig
+    private var callback: DotsCallback? = null
 
     init {
         inflate(context, R.layout.dots_scroll_control, this)
@@ -26,14 +26,10 @@ class DotsView(context: Context, attrs: AttributeSet) :
         isHorizontalScrollBarEnabled = false
     }
 
-    fun setTabClickListener(tabClick: OnTabClick) {
-        this.tabClick = tabClick
-    }
-
     fun loadItems(size: Int, currentIndex: Int) {
         restoreView(currentIndex)
         for (i in 0 until size) {
-            addDotItem(i)
+            addDotItem()
         }
         visibility = View.VISIBLE
         scrollView.visibility = View.VISIBLE
@@ -56,28 +52,28 @@ class DotsView(context: Context, attrs: AttributeSet) :
     }
 
     fun next() {
-        if (currentSelectedIndex < tabItems.size - 1) {
-            tabItems[currentSelectedIndex].setItemDeselected()
-            currentSelectedIndex++
-            tabItems[currentSelectedIndex].setItemSelected()
-        }
+        selectIndex(currentSelectedIndex + 1)
     }
 
     fun previous() {
-        if (currentSelectedIndex > 0) {
-            tabItems[currentSelectedIndex].setItemDeselected()
-            currentSelectedIndex--
-            tabItems[currentSelectedIndex].setItemSelected()
-        }
+        selectIndex(currentSelectedIndex - 1)
     }
 
     fun selectIndex(index: Int) {
-        if (tabItems.size > index) {
+        if (checkIndex(index)) {
+            val previous = currentSelectedIndex
             tabItems[currentSelectedIndex].setItemDeselected()
             currentSelectedIndex = index
             tabItems[currentSelectedIndex].setItemSelected()
+            callback?.onIndexChange(previous, currentSelectedIndex)
         }
     }
+
+    fun setCallback(callback: DotsCallback) {
+        this.callback = callback
+    }
+
+    private fun checkIndex(index: Int) = index >= 0 && index < tabItems.size
 
     private fun restoreView(currentIndex: Int) {
         this.tabItems = ArrayList()
@@ -85,20 +81,9 @@ class DotsView(context: Context, attrs: AttributeSet) :
         container.removeAllViews()
     }
 
-    private fun addDotItem(index: Int) {
+    private fun addDotItem() {
         val dotTabItem = DotTabItem(context, config = config)
-        addListeners(dotTabItem, index)
         tabItems.add(dotTabItem)
         container.addView(dotTabItem)
-    }
-
-    private fun addListeners(item: DotTabItem, index: Int) {
-        item.setOnClickListener {
-            tabClick?.selectTab(index)
-        }
-    }
-
-    interface OnTabClick {
-        fun selectTab(index: Int)
     }
 }
