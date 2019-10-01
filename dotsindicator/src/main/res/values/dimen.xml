@@ -7,7 +7,7 @@
 
     <dimen name="dot_standard_size">10dp</dimen>
     <dimen name="dot_minimum_size">1dp</dimen>
-    <dimen name="dot_radius">2dp</dimen>
+    <dimen name="dot_radius">3dp</dimen>
 
     <dimen name="dot_padding">8dp</dimen>
 

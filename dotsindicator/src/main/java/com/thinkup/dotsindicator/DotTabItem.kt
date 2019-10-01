@@ -3,15 +3,15 @@ package com.thinkup.dotsindicator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
 import android.os.Handler
 import android.util.AttributeSet
-import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.ViewCompat
 import kotlinx.android.synthetic.main.dot_item.view.*
+import android.util.TypedValue
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 
 class DotTabItem(context: Context, attrs: AttributeSet? = null, private val config: DotConfig) :
     LinearLayout(context, attrs) {
@@ -47,21 +47,35 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
     }
 
     private fun changeBackground(selected: Boolean, rounded: Boolean) {
-        val unwrappedDrawable = AppCompatResources.getDrawable(
-            context,
-            if (rounded) R.drawable.bg_item_round else R.drawable.bg_item_rect
-        )?.mutate()
-        unwrappedDrawable?.let {
-            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
-            DrawableCompat.setTint(wrappedDrawable, getColor(selected))
-        }
+        Handler().postDelayed({ mainItemView.background = getDrawable(selected, rounded) }, config.duration.toLong())
+    }
 
-        Handler().postDelayed({ mainItemView.background = unwrappedDrawable }, config.duration.toLong())
+    private fun getDrawable(selected: Boolean, rounded: Boolean): Drawable? {
+        val value = TypedValue()
+        resources.getValue(if (selected) config.selectedColor else config.unselectedColor, value, true) // will throw if resId doesn't exist
+
+        if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+            val unwrappedDrawable = AppCompatResources.getDrawable(
+                context,
+                if (rounded) R.drawable.bg_item_round else R.drawable.bg_item_rect
+            )?.mutate()
+            unwrappedDrawable?.let {
+                val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
+                DrawableCompat.setTint(wrappedDrawable, getColor(selected))
+                return unwrappedDrawable
+            }
+        } else {
+            return AppCompatResources.getDrawable(
+                context,
+                value.resourceId
+            )?.mutate()
+        }
+        return null
     }
 
     private fun getColor(selected: Boolean): Int {
-        return if (selected) config.selectedColor
-        else config.unselectedColor
+        return if (selected) ContextCompat.getColor(context, config.selectedColor)
+        else ContextCompat.getColor(context, config.unselectedColor)
     }
 
     private fun scaleItem(selected: Boolean) {

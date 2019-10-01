@@ -27,13 +27,13 @@ class DotConfig(context: Context, attrs: AttributeSet) {
                     getDefaultDimen(context, R.dimen.dot_width_select)
                 )
 
-                selectedColor = getColor(
+                selectedColor = getResourceId(
                     R.styleable.DotsView_dotSelectedColor,
-                    getDefaultColor(context, R.color.dot_selected)
+                    R.color.dot_selected
                 )
-                unselectedColor = getColor(
+                unselectedColor = getResourceId(
                     R.styleable.DotsView_dotUnselectedColor,
-                    getDefaultColor(context, R.color.dot_unselected)
+                    R.color.dot_unselected
                 )
 
                 margin = getDimensionPixelSize(
@@ -47,7 +47,6 @@ class DotConfig(context: Context, attrs: AttributeSet) {
     }
 
     private fun getDefaultDimen(context: Context, id: Int): Int = context.resources.getDimensionPixelSize(id)
-    private fun getDefaultColor(context: Context, id: Int): Int = ContextCompat.getColor(context, id)
 
     var unselectedColor: Int
         internal set
