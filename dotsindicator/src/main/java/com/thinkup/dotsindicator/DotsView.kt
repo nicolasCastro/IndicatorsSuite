@@ -1,6 +1,7 @@
 package com.thinkup.dotsindicator
 
 import android.content.Context
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
@@ -10,6 +11,11 @@ import java.util.*
 
 class DotsView(context: Context, attrs: AttributeSet) :
     HorizontalScrollView(context, attrs, 0) {
+
+    companion object {
+        const val DEFAULT_DELAY = 500L
+        const val LOADER_INFINITE = -1
+    }
 
     private var padding: Int = 0
 
@@ -21,6 +27,21 @@ class DotsView(context: Context, attrs: AttributeSet) :
     init {
         inflate(context, R.layout.dots_scroll_control, this)
         config = DotConfig(context, attrs)
+
+        with(context) {
+            val attributes = obtainStyledAttributes(attrs, R.styleable.DotsView)
+            with(attributes) {
+                val size = getInteger(R.styleable.DotsView_itemsCount, 0)
+                val current = getInteger(R.styleable.DotsView_currentIndex, 0)
+                if (size > 0) loadItems(size, current)
+
+                val loader = getBoolean(R.styleable.DotsView_loader, false)
+                val delay = getInteger(R.styleable.DotsView_loaderDelay, DEFAULT_DELAY.toInt())
+                val repeat = getInteger(R.styleable.DotsView_loaderRepeatCount, LOADER_INFINITE)
+                if (loader) loader(delay.toLong(), repeat, current)
+            }
+        }
+
         padding = resources.getDimensionPixelSize(R.dimen.dot_standard_size)
         isVerticalScrollBarEnabled = false
         isHorizontalScrollBarEnabled = false
@@ -49,6 +70,20 @@ class DotsView(context: Context, attrs: AttributeSet) :
                 selectIndex(index)
             }
         })
+    }
+
+    fun loader(delay: Long = DEFAULT_DELAY, repeatCount: Int = LOADER_INFINITE, currentIndex: Int = 0) {
+        selectIndex(currentIndex)
+        load(delay, repeatCount, if (repeatCount == LOADER_INFINITE) LOADER_INFINITE else 0)
+    }
+
+    private fun load(delay: Long = 500, repeatCount: Int = LOADER_INFINITE, actualRepeat: Int = 0) {
+        Handler().postDelayed({
+            if (currentSelectedIndex < tabItems.size - 1) next() else selectIndex(0)
+            val count =
+                if (repeatCount != LOADER_INFINITE && currentSelectedIndex == 0) actualRepeat + 1 else actualRepeat
+            if (count == LOADER_INFINITE || count < repeatCount) load(delay, repeatCount, count)
+        }, delay)
     }
 
     fun next() {

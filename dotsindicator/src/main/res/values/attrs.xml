@@ -8,5 +8,11 @@
         <attr name="dotHeight" format="dimension"/>
         <attr name="dotMargin" format="dimension"/>
         <attr name="animationDuration" format="integer"/>
+        <attr name="rounded" format="boolean"/>
+        <attr name="itemsCount" format="integer"/>
+        <attr name="currentIndex" format="integer"/>
+        <attr name="loader" format="boolean"/>
+        <attr name="loaderDelay" format="integer"/>
+        <attr name="loaderRepeatCount" format="integer"/>
     </declare-styleable>
 </resources>

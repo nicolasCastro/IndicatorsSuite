@@ -5,5 +5,5 @@
       android:layout_height="@dimen/dot_height"
       android:layout_margin="@dimen/dot_width"
       android:gravity="center"
-      android:background="@drawable/bg_item_selected"
+      android:background="@drawable/bg_item_round"
       android:orientation="horizontal"/>

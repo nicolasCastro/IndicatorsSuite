@@ -41,6 +41,7 @@ class DotConfig(context: Context, attrs: AttributeSet) {
                     getDefaultDimen(context, R.dimen.dot_padding)
                 )
                 duration = getInt(R.styleable.DotsView_animationDuration, ANIM_LARGE_DURATION)
+                rounded = getBoolean(R.styleable.DotsView_rounded, true)
             }
         }
     }
@@ -61,5 +62,7 @@ class DotConfig(context: Context, attrs: AttributeSet) {
     var margin: Int
         internal set
     var duration: Int
+        internal set
+    var rounded: Boolean
         internal set
 }

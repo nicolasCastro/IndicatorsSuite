@@ -61,4 +61,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+
+    <com.thinkup.dotsindicator.DotsView
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotSelectedColor="#38ff73"
+            app:dotUnselectedColor="#dcdcdc"
+            app:dotMargin="8dp"
+            app:itemsCount="4"
+            app:loader="true"
+            app:rounded="false"
+            app:dotSelectedWidth="18dp"
+            android:paddingBottom="40dp"
+            app:dotHeight="18dp"
+            app:dotWidth="18dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

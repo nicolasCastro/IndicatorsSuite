@@ -21,7 +21,7 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
 
     init {
         inflate(context, R.layout.dot_item, this)
-        changeBackground(false)
+        changeBackground(false, config.rounded)
 
         fromScaleX = config.width.toFloat()
         toScaleX = config.selectedWidth.toFloat()
@@ -42,12 +42,15 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
     }
 
     private fun setItemSelected(selected: Boolean) {
-        changeBackground(selected)
+        changeBackground(selected, config.rounded)
         scaleItem(selected)
     }
 
-    private fun changeBackground(selected: Boolean) {
-        val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.bg_item_selected)?.mutate()
+    private fun changeBackground(selected: Boolean, rounded: Boolean) {
+        val unwrappedDrawable = AppCompatResources.getDrawable(
+            context,
+            if (rounded) R.drawable.bg_item_round else R.drawable.bg_item_rect
+        )?.mutate()
         unwrappedDrawable?.let {
             val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
             DrawableCompat.setTint(wrappedDrawable, getColor(selected))
@@ -80,26 +83,5 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
         val layoutParams = mainItemView.layoutParams
         layoutParams.width = value
         mainItemView.layoutParams = layoutParams
-    }
-
-    private fun calculateScrollXForTab(selectedChild: View): Int {
-        val selectedWidth = selectedChild.width
-
-        // base scroll amount: places center of tab in center of parent
-        val scrollBase = selectedChild.left + selectedWidth / 2 - width / 2
-        // offset amount: fraction of the distance between centers of tabs
-
-        return if (ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_LTR)
-            scrollBase
-        else
-            scrollBase
-    }
-
-    private fun adjustAlpha(color: Int, factor: Float): Int {
-        val alpha = Math.round(Color.alpha(color) * factor)
-        val red = Color.red(color)
-        val green = Color.green(color)
-        val blue = Color.blue(color)
-        return Color.argb(alpha, red, green, blue)
     }
 }
