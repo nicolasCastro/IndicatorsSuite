@@ -62,7 +62,8 @@ class DotsView(context: Context, attrs: AttributeSet) :
         view.adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                loadItems(view.adapter?.itemCount ?: 0, 0)
+                val items = view.adapter?.itemCount ?: 0
+                if (items > 0) loadItems(items, 0)
             }
         })
         view.addItemDecoration(object : DotsItemDecoration() {
