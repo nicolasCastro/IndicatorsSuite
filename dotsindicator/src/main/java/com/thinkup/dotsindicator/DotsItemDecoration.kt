@@ -9,7 +9,7 @@ internal abstract class DotsItemDecoration : RecyclerView.ItemDecoration() {
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         val layoutManager = parent.layoutManager as LinearLayoutManager
-        val activePosition = layoutManager.findFirstVisibleItemPosition()
+        val activePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
         if (activePosition == RecyclerView.NO_POSITION || activePosition == current) {
             return
         }

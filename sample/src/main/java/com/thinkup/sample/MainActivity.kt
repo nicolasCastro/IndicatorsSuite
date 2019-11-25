@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity(), DotsCallback {
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
             holder.bind(items[position])
+            holder.itemView.layoutParams.width = (holder.itemView.resources.displayMetrics.widthPixels * 70) / 100
         }
 
         class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
