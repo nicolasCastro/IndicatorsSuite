@@ -42,6 +42,7 @@ class DotConfig(context: Context, attrs: AttributeSet) {
                 )
                 duration = getInt(R.styleable.DotsView_animationDuration, ANIM_LARGE_DURATION)
                 rounded = getBoolean(R.styleable.DotsView_rounded, true)
+                border = getBoolean(R.styleable.DotsView_borders, true)
             }
         }
     }
@@ -63,5 +64,7 @@ class DotConfig(context: Context, attrs: AttributeSet) {
     var duration: Int
         internal set
     var rounded: Boolean
+        internal set
+    var border: Boolean
         internal set
 }

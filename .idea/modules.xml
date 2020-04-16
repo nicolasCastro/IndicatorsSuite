@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/dotsIndicator.iml" filepath="$PROJECT_DIR$/dotsIndicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dotsindicator/dotsindicator.iml" filepath="$PROJECT_DIR$/dotsindicator/dotsindicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dotsIndicator.iml" filepath="$PROJECT_DIR$/dotsIndicator.iml" group="dotsIndicator" />
+      <module fileurl="file://$PROJECT_DIR$/dotsindicator/dotsindicator.iml" filepath="$PROJECT_DIR$/dotsindicator/dotsindicator.iml" group="dotsIndicator/dotsindicator" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" group="dotsIndicator/sample" />
     </modules>
   </component>
 </project>

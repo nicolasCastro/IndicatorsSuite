@@ -3,6 +3,7 @@ package com.thinkup.dotsindicator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Handler
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -21,7 +22,7 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
 
     init {
         inflate(context, R.layout.dot_item, this)
-        changeBackground(false, config.rounded)
+        changeBackground(false, config.rounded, config.border)
 
         fromScaleX = config.width.toFloat()
         toScaleX = config.selectedWidth.toFloat()
@@ -42,15 +43,15 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
     }
 
     private fun setItemSelected(selected: Boolean) {
-        changeBackground(selected, config.rounded)
+        changeBackground(selected, config.rounded, config.border)
         scaleItem(selected)
     }
 
-    private fun changeBackground(selected: Boolean, rounded: Boolean) {
-        Handler().postDelayed({ mainItemView.background = getDrawable(selected, rounded) }, config.duration.toLong())
+    private fun changeBackground(selected: Boolean, rounded: Boolean, border: Boolean) {
+        Handler().postDelayed({ mainItemView.background = getDrawable(selected, rounded, border) }, config.duration.toLong())
     }
 
-    private fun getDrawable(selected: Boolean, rounded: Boolean): Drawable? {
+    private fun getDrawable(selected: Boolean, rounded: Boolean, border: Boolean): Drawable? {
         val value = TypedValue()
         resources.getValue(if (selected) config.selectedColor else config.unselectedColor, value, true) // will throw if resId doesn't exist
 
@@ -61,14 +62,13 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
             )?.mutate()
             unwrappedDrawable?.let {
                 val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable)
+                if (!border) DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SRC_ATOP)
                 DrawableCompat.setTint(wrappedDrawable, getColor(selected))
+
                 return unwrappedDrawable
             }
         } else {
-            return AppCompatResources.getDrawable(
-                context,
-                value.resourceId
-            )?.mutate()
+            return AppCompatResources.getDrawable(context, value.resourceId)?.mutate()
         }
         return null
     }
