@@ -111,9 +111,11 @@ class DotsView(context: Context, attrs: AttributeSet) :
 
     private fun applyGradient() {
         if (gradient) {
-            if (checkIndex(currentSelectedIndex + 1)) tabItems[currentSelectedIndex + 1].updateAlpha(60)
-            if (checkIndex(currentSelectedIndex - 1)) tabItems[currentSelectedIndex - 1].updateAlpha(60)
-            tabItems.forEachIndexed { i, dotTabItem -> if (i !in currentSelectedIndex - 1..currentSelectedIndex + 1) dotTabItem.updateAlpha(30) }
+            if (checkIndex(currentSelectedIndex + 1)) tabItems[currentSelectedIndex + 1].updateAlpha(config.gradientNearPercentage)
+            if (checkIndex(currentSelectedIndex - 1)) tabItems[currentSelectedIndex - 1].updateAlpha(config.gradientNearPercentage)
+            tabItems.forEachIndexed { i, dotTabItem ->
+                if (i !in currentSelectedIndex - 1..currentSelectedIndex + 1) dotTabItem.updateAlpha(config.gradientFarPercentage)
+            }
         }
     }
 

@@ -26,6 +26,9 @@
             app:dotWidth="20dp"
             app:borders="false"
             app:gradient="true"
+            app:gradientSelectedPercentage="100"
+            app:gradientNearPercentage="85"
+            app:gradientFarPercentage="70"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/testList"/>

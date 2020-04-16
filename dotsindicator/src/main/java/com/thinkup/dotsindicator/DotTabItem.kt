@@ -44,15 +44,13 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
 
     fun updateAlpha(alpha: Int) {
         val f = alpha / 100F
-//        Handler().postDelayed({
         mainItemView.animate().alpha(f).start()
-//        }, config.duration.toLong() /2)
     }
 
     private fun setItemSelected(selected: Boolean) {
         changeBackground(selected, config.rounded, config.border)
         scaleItem(selected)
-        updateAlpha(100)
+        updateAlpha(config.gradientSelectedPercentage)
     }
 
     private fun changeBackground(selected: Boolean, rounded: Boolean, border: Boolean) {

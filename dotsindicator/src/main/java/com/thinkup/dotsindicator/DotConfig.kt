@@ -43,6 +43,9 @@ class DotConfig(context: Context, attrs: AttributeSet) {
                 duration = getInt(R.styleable.DotsView_animationDuration, ANIM_LARGE_DURATION)
                 rounded = getBoolean(R.styleable.DotsView_rounded, true)
                 border = getBoolean(R.styleable.DotsView_borders, true)
+                gradientSelectedPercentage = getInt(R.styleable.DotsView_gradientSelectedPercentage, 100)
+                gradientNearPercentage = getInt(R.styleable.DotsView_gradientNearPercentage, 60)
+                gradientFarPercentage = getInt(R.styleable.DotsView_gradientFarPercentage, 30)
             }
         }
     }
@@ -66,5 +69,11 @@ class DotConfig(context: Context, attrs: AttributeSet) {
     var rounded: Boolean
         internal set
     var border: Boolean
+        internal set
+    var gradientNearPercentage: Int
+        internal set
+    var gradientFarPercentage: Int
+        internal set
+    var gradientSelectedPercentage: Int
         internal set
 }
