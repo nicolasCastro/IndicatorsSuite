@@ -18,7 +18,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
     }
 
     private var padding: Int = 0
-
+    private var gradient = false
     private var tabItems = mutableListOf<DotTabItem>()
     private var currentSelectedIndex: Int = 0
     private val config: DotConfig
@@ -38,6 +38,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
                 val loader = getBoolean(R.styleable.DotsView_loader, false)
                 val delay = getInteger(R.styleable.DotsView_loaderDelay, DEFAULT_DELAY.toInt())
                 val repeat = getInteger(R.styleable.DotsView_loaderRepeatCount, LOADER_INFINITE)
+                gradient = getBoolean(R.styleable.DotsView_gradient, false)
                 if (loader) loader(delay.toLong(), repeat, current)
             }
         }
@@ -55,6 +56,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
         visibility = View.VISIBLE
         scrollView.visibility = View.VISIBLE
         tabItems[currentSelectedIndex].setItemSelected()
+        applyGradient()
     }
 
     fun attach(view: RecyclerView) {
@@ -103,6 +105,15 @@ class DotsView(context: Context, attrs: AttributeSet) :
             currentSelectedIndex = index
             tabItems[currentSelectedIndex].setItemSelected()
             callback?.onIndexChange(previous, currentSelectedIndex)
+            applyGradient()
+        }
+    }
+
+    private fun applyGradient() {
+        if (gradient) {
+            if (checkIndex(currentSelectedIndex + 1)) tabItems[currentSelectedIndex + 1].updateAlpha(60)
+            if (checkIndex(currentSelectedIndex - 1)) tabItems[currentSelectedIndex - 1].updateAlpha(60)
+            tabItems.forEachIndexed { i, dotTabItem -> if (i !in currentSelectedIndex - 1..currentSelectedIndex + 1) dotTabItem.updateAlpha(30) }
         }
     }
 
