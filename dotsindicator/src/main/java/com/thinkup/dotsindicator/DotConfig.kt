@@ -44,7 +44,8 @@ class DotConfig(context: Context, attrs: AttributeSet) {
                 rounded = getBoolean(R.styleable.DotsView_rounded, true)
                 border = getBoolean(R.styleable.DotsView_borders, true)
                 gradientSelectedPercentage = getInt(R.styleable.DotsView_gradientSelectedPercentage, 100)
-                gradientNearPercentage = getInt(R.styleable.DotsView_gradientNearPercentage, 60)
+                gradientNearNextPercentage = getInt(R.styleable.DotsView_gradientNearNextPercentage, 60)
+                gradientNearPrePercentage = getInt(R.styleable.DotsView_gradientNearPrePercentage, 60)
                 gradientFarPercentage = getInt(R.styleable.DotsView_gradientFarPercentage, 30)
             }
         }
@@ -70,7 +71,9 @@ class DotConfig(context: Context, attrs: AttributeSet) {
         internal set
     var border: Boolean
         internal set
-    var gradientNearPercentage: Int
+    var gradientNearNextPercentage: Int
+        internal set
+    var gradientNearPrePercentage: Int
         internal set
     var gradientFarPercentage: Int
         internal set

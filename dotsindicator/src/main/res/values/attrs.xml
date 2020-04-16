@@ -17,7 +17,8 @@
         <attr name="loaderRepeatCount" format="integer" />
         <attr name="gradient" format="boolean" />
         <attr name="gradientSelectedPercentage" format="integer" />
-        <attr name="gradientNearPercentage" format="integer" />
+        <attr name="gradientNearNextPercentage" format="integer" />
+        <attr name="gradientNearPrePercentage" format="integer" />
         <attr name="gradientFarPercentage" format="integer" />
     </declare-styleable>
 </resources>
