@@ -56,7 +56,16 @@ class DotsView(context: Context, attrs: AttributeSet) :
         visibility = View.VISIBLE
         scrollView.visibility = View.VISIBLE
         tabItems[currentSelectedIndex].setItemSelected()
+        setSelectedSteps()
         applyGradient()
+    }
+
+    private fun setSelectedSteps() {
+        if (config.steps) {
+            for (i in 0..currentSelectedIndex) {
+                tabItems[i].setItemSelected()
+            }
+        }
     }
 
     fun attach(view: RecyclerView) {
@@ -104,6 +113,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
             tabItems[currentSelectedIndex].setItemDeselected()
             currentSelectedIndex = index
             tabItems[currentSelectedIndex].setItemSelected()
+            setSelectedSteps()
             callback?.onIndexChange(previous, currentSelectedIndex)
             applyGradient()
         }
