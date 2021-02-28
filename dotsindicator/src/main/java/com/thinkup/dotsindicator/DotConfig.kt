@@ -1,8 +1,7 @@
 package com.thinkup.dotsindicator
 
-import android.util.AttributeSet
 import android.content.Context
-import androidx.core.content.ContextCompat
+import android.util.AttributeSet
 
 class DotConfig(context: Context, attrs: AttributeSet) {
 

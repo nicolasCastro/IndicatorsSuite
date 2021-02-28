@@ -12,6 +12,7 @@
             android:layout_height="60dp"
             android:paddingHorizontal="16dp"
             app:currentStep="0"
+            app:animationDuration="500"
             app:layout_constraintTop_toTopOf="parent"
             app:stepIndicatorSize="24dp"
             app:stepProgressLineThickness="6dp"
@@ -81,6 +82,31 @@
             app:stepUncompletedColor="@color/colorAccent"
             app:stepsCount="3" />
 
+    <LinearLayout
+            android:id="@+id/subView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView5" />
+
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/testList"
+            />
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/testList"
+            app:layout_constraintBottom_toTopOf="@+id/stepAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
             android:id="@+id/stepBack"
@@ -89,6 +115,15 @@
             android:text="Step Back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+            android:id="@+id/stepAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step Add view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
             android:id="@+id/stepNext"

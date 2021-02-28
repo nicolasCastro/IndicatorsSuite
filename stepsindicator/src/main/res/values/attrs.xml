@@ -16,5 +16,6 @@
         <attr name="stepsCount" format="integer" />
         <attr name="currentStep" format="integer" />
         <attr name="shownCompetedIcon" format="boolean" />
+        <attr name="isTouchable" format="boolean" />
     </declare-styleable>
 </resources>

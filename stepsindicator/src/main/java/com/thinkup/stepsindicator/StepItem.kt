@@ -27,6 +27,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
     private var fromScaleX: Float = 1.0f
     private var toScaleX: Float = 1.0f
     private var lastfactor: Int = MIN_STEP_FACTOR
+    private var index: Int = 0
 
     fun init(index: Int, isFirst: Boolean, isLast: Boolean) {
         tkupStepsControlText.text = "${index + 1}"
@@ -43,6 +44,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         fromScaleX = config.size.toFloat()
         toScaleX = config.selectedSize.toFloat()
         lastfactor = if (isLast) STEP_FACTOR else MIN_STEP_FACTOR
+        this.index = index
         setBackground(false, config.border)
         setSizes()
         tkupStepsProgressContainer.backgroundTintList = ColorStateList.valueOf(getLineColor(false))
@@ -54,18 +56,22 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlIcon.setImageResource(config.iconCompleted)
     }
 
+    fun setOnClickListener(action: (Int) -> Unit) {
+        tkupStepsControlItemView.setOnClickListener { action(index) }
+    }
+
     init {
         inflate(context, R.layout.steps_item, this)
     }
 
     fun setItemSelected(animated: Boolean = false) {
         setInternalItemSelected(true, false)
-        if (!animated) tkupStepsControlProgress.animateProgress(lastfactor)
-        else tkupStepsControlProgress.animateProgress(STEP_FACTOR, reverse = true)
+        if (!animated) tkupStepsControlProgress.animateProgress(lastfactor, duration = config.duration.toLong())
+        else tkupStepsControlProgress.animateProgress(STEP_FACTOR, duration = config.duration.toLong(), reverse = true)
     }
 
     fun loadProgress() {
-        tkupStepsControlProgress.animateProgress(STEP_FACTOR)
+        tkupStepsControlProgress.animateProgress(STEP_FACTOR, duration = config.duration.toLong())
     }
 
     fun loadReverseProgress() {
