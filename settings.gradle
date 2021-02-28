@@ -1,1 +1,2 @@
+include ':stepsindicator'
 include ':sample', ':dotsindicator'

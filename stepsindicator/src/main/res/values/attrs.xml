@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StepsView">
+        <attr name="stepUncompletedColor" format="reference" />
+        <attr name="stepCompletedColor" format="reference" />
+        <attr name="stepIndicatorSize" format="dimension" />
+        <attr name="stepSelectedIndicatorSize" format="dimension" />
+        <attr name="stepProgressLineThickness" format="dimension" />
+        <attr name="stepProgressLineUncompletedColor" format="color" />
+        <attr name="stepProgressLineCompletedColor" format="color" />
+        <attr name="stepTextUncompletedColor" format="color" />
+        <attr name="stepTextCompletedColor" format="color" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="borders" format="boolean" />
+        <attr name="stepsCount" format="integer" />
+        <attr name="currentStep" format="integer" />
+    </declare-styleable>
+</resources>

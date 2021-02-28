@@ -41,6 +41,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
                 gradient = getBoolean(R.styleable.DotsView_gradient, false)
                 if (loader) loader(delay.toLong(), repeat, current)
             }
+            attributes.recycle()
         }
 
         padding = resources.getDimensionPixelSize(R.dimen.dot_standard_size)

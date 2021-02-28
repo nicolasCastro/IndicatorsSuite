@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="step_uncompleted">#CDCDCD</color>
+    <color name="step_completed">#00CA35</color>
+    <color name="step_completed_text">#FBFBFB</color>
+    <color name="step_uncompleted_text">#000000</color>
+</resources>

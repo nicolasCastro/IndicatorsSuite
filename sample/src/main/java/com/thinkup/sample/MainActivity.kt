@@ -1,58 +1,59 @@
 package com.thinkup.sample
 
-import androidx.appcompat.app.AppCompatActivity
-
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.thinkup.dotsindicator.DotsCallback
+import com.thinkup.easycore.ViewRenderer
+import com.thinkup.easylist.RendererAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.test_item.view.*
 
-class MainActivity : AppCompatActivity(), DotsCallback {
+class MainActivity : AppCompatActivity() {
+
+    private val adapter = RendererAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        dots.loadItems(3, 0)
-
-        testNextView.setOnClickListener { dots.next() }
-        testPreviousView.setOnClickListener { dots.previous() }
-
-        testList.adapter = TestAdapter()
-        testList.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        PagerSnapHelper().attachToRecyclerView(testList)
-        dotsRec.attach(testList)
-        dotsRec.setCallback(this)
+        initList()
     }
 
-    class TestAdapter(private val items: List<String> = listOf("Item1", "Item2", "Item3")) :
-        RecyclerView.Adapter<TestAdapter.Holder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
-            Holder(LayoutInflater.from(parent.context).inflate(R.layout.test_item, parent, false))
-
-        override fun getItemCount(): Int = items.size
-
-        override fun onBindViewHolder(holder: Holder, position: Int) {
-            holder.bind(items[position])
-            holder.itemView.layoutParams.width = (holder.itemView.resources.displayMetrics.widthPixels * 70) / 100
-        }
-
-        class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-            fun bind(item: String) {
-                itemView.testItemView.text = item
+    private fun initList() {
+        featuresList.layoutManager = LinearLayoutManager(this)
+        featuresList.adapter = adapter
+        adapter.addRenderer(ItemRenderer(object : ItemRenderer.Callback {
+            override fun onItemClick(position: Int) {
+                this@MainActivity.onItemClick(position)
             }
-        }
+        }))
+        adapter.setItems(
+            listOf(
+                "Dots indicator", "Steps indicator",
+            )
+        )
     }
 
-    override fun onIndexChange(previous: Int, current: Int) {
-        Toast.makeText(this, "Previous:$previous, Current:$current", Toast.LENGTH_SHORT).show()
+    private fun onItemClick(position: Int) {
+        val intent = when (position) {
+            0 -> Intent(this, DotsActivity::class.java)
+            else -> Intent(this, StepsActivity::class.java)
+        }
+        startActivity(intent)
+    }
+
+    class ItemRenderer(private val callback: Callback) : ViewRenderer<String, Button>(String::class) {
+
+        override fun create(parent: ViewGroup) = Button(parent.context)
+
+        override fun bind(view: Button, model: String, position: Int) {
+            view.text = model
+            view.setOnClickListener { callback.onItemClick(position) }
+        }
+
+        interface Callback {
+            fun onItemClick(position: Int)
+        }
     }
 }
