@@ -46,8 +46,13 @@ class StepsConfig(context: Context, attrs: AttributeSet) {
                     R.styleable.StepsView_stepTextUncompletedColor,
                     R.color.step_uncompleted_text
                 )
+                iconCompleted = getResourceId(
+                    R.styleable.StepsView_stepIconCompleted,
+                    R.drawable.tkup_completed_step
+                )
                 duration = getInt(R.styleable.StepsView_animationDuration, ANIM_DEFAULT_VALUE.toInt())
                 border = getBoolean(R.styleable.StepsView_borders, true)
+                shownCompetedIcon = getBoolean(R.styleable.StepsView_shownCompetedIcon, true)
             }
         }
     }
@@ -72,8 +77,12 @@ class StepsConfig(context: Context, attrs: AttributeSet) {
         internal set
     var textCompletedColor: Int
         internal set
+    var iconCompleted: Int
+        internal set
     var duration: Int
         internal set
     var border: Boolean
+        internal set
+    var shownCompetedIcon: Boolean
         internal set
 }

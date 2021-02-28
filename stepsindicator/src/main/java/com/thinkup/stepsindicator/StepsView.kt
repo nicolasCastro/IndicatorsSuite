@@ -36,13 +36,13 @@ class StepsView(context: Context, attributeSet: AttributeSet) : FrameLayout(cont
         for (i in 0 until stepsCount) {
             addStepItem(i, i == 0, i == stepsCount - 1)
         }
-        currentSelectedIndex = currentStep
+        currentSelectedIndex = if (currentStep <= stepsCount) currentStep else stepsCount - 1
         setSelectedSteps()
     }
 
     private fun setSelectedSteps() {
         for (i in 0..currentSelectedIndex) {
-            tabItems[i].setItemSelected()
+            selectIndex(i)
         }
     }
 

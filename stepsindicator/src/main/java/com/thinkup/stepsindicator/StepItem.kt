@@ -16,11 +16,11 @@ import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isVisible
 import com.thinkup.stepsindicator.ext.*
 import kotlinx.android.synthetic.main.steps_item.view.*
 
-class StepItem(context: Context, attrs: AttributeSet? = null, private val config: StepsConfig) :
-    LinearLayout(context, attrs) {
+class StepItem(context: Context, attrs: AttributeSet? = null, private val config: StepsConfig) : LinearLayout(context, attrs) {
 
     constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, StepsConfig(context, attrs!!))
 
@@ -36,8 +36,8 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         when {
             isFirst -> tkupStepsProgressContainer.setMargins(left = config.size / 2)
             isLast -> {
-                tkupStepsProgressContainer.setMargins(right = config.selectedSize / 2)
-                tkupStepsProgressContainer.layoutParams.width = config.selectedSize / 2
+                tkupStepsProgressContainer.setMargins(right = config.selectedSize - (config.size / 2))
+                tkupStepsProgressContainer.layoutParams.width = config.size / 2
             }
         }
         fromScaleX = config.size.toFloat()
@@ -47,8 +47,11 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         setSizes()
         tkupStepsProgressContainer.backgroundTintList = ColorStateList.valueOf(getLineColor(false))
         tkupStepsControlProgress.backgroundTintList = ColorStateList.valueOf(getLineColor(true))
+        tkupStepsControlIcon.imageTintList = ColorStateList.valueOf(getColor(config.textCompletedColor))
         tkupStepsControlText.setTextColor(makeSelectorTextColor())
         tkupStepsControlText.isEnabled = false
+        tkupStepsControlIcon.isVisible = false
+        tkupStepsControlIcon.setImageResource(config.iconCompleted)
     }
 
     init {
@@ -56,7 +59,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
     }
 
     fun setItemSelected(animated: Boolean = false) {
-        setInternalItemSelected(true, true)
+        setInternalItemSelected(true, false)
         if (!animated) tkupStepsControlProgress.animateProgress(lastfactor)
         else tkupStepsControlProgress.animateProgress(STEP_FACTOR, reverse = true)
     }
@@ -74,9 +77,11 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
     }
 
     private fun setInternalItemSelected(selected: Boolean, completed: Boolean) {
-        tkupStepsControlText.isEnabled = completed
-        changeBackground(completed, config.border)
-        scaleItem(selected)
+        tkupStepsControlText.isEnabled = selected || completed
+        changeBackground(selected || completed, config.border)
+        scaleItem(tkupStepsControlItemView, selected)
+        if (config.shownCompetedIcon) scaleItem(tkupStepsControlIcon, !completed) { tkupStepsControlIcon.isVisible = completed }
+        if (config.shownCompetedIcon) scaleItem(tkupStepsControlText, !completed) { tkupStepsControlText.isVisible = !completed }
     }
 
     private fun changeBackground(selected: Boolean, border: Boolean) {
@@ -121,18 +126,18 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
 
     private fun getColor(id: Int) = ContextCompat.getColor(context, id)
 
-    private fun scaleItem(selected: Boolean) {
+    private fun scaleItem(target: View, selected: Boolean, listener: (() -> Unit)? = null) {
         val fromScaleX = if (selected) this.fromScaleX else this.toScaleX
         val toScaleX = if (selected) this.toScaleX else this.fromScaleX
 
         val anim = ValueAnimator.ofInt(fromScaleX.toInt(), toScaleX.toInt())
         anim.addUpdateListener { valueAnimator ->
             val value = valueAnimator.animatedValue as Int
-            scale(tkupStepsControlItemView, value)
+            scale(target, value)
         }
         anim.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
-
+                listener?.invoke()
             }
         })
         anim.duration = config.duration.toLong()

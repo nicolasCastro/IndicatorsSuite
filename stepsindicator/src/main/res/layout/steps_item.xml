@@ -40,6 +40,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+            android:id="@+id/tkupStepsControlIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:src="@drawable/tkup_completed_step"
+            app:layout_constraintBottom_toBottomOf="@id/tkupStepsControlItemView"
+            app:layout_constraintEnd_toEndOf="@id/tkupStepsControlItemView"
+            app:layout_constraintStart_toStartOf="@id/tkupStepsControlItemView"
+            tools:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/tkupStepsControlItemView" />
+
     <TextView
             android:id="@+id/tkupStepsControlText"
             android:layout_width="0dp"

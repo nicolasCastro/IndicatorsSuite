@@ -9,7 +9,19 @@ class StepsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_steps)
 
-        stepBack.setOnClickListener { stepsView.previous() }
-        stepNext.setOnClickListener { stepsView.next() }
+        stepBack.setOnClickListener {
+            stepsView.previous()
+            stepsView2.previous()
+            stepsView3.previous()
+            stepsView4.previous()
+            stepsView5.previous()
+        }
+        stepNext.setOnClickListener {
+            stepsView.next()
+            stepsView2.next()
+            stepsView3.next()
+            stepsView4.next()
+            stepsView5.next()
+        }
     }
 }
