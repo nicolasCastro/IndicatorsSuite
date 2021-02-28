@@ -12,6 +12,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import kotlinx.android.synthetic.main.dot_item.view.*
 import android.util.TypedValue
 import android.graphics.drawable.Drawable
+import android.os.Looper
 import androidx.core.content.ContextCompat
 
 class DotTabItem(context: Context, attrs: AttributeSet? = null, private val config: DotConfig) :
@@ -54,7 +55,7 @@ class DotTabItem(context: Context, attrs: AttributeSet? = null, private val conf
     }
 
     private fun changeBackground(selected: Boolean, rounded: Boolean, border: Boolean) {
-        Handler().postDelayed({ mainItemView.background = getDrawable(selected, rounded, border) }, config.duration.toLong())
+        Handler(Looper.getMainLooper()).postDelayed({ mainItemView.background = getDrawable(selected, rounded, border) }, config.duration.toLong())
     }
 
     private fun getDrawable(selected: Boolean, rounded: Boolean, border: Boolean): Drawable? {

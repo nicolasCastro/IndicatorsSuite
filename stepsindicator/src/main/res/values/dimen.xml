@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="step_size">24dp</dimen>
+    <dimen name="step_size_select">36dp</dimen>
+    <dimen name="step_line_thickness">6dp</dimen>
+
+</resources>

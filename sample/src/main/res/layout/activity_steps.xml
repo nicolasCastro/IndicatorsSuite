@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StepsActivity">
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:currentStep="0"
+            app:animationDuration="500"
+            app:layout_constraintTop_toTopOf="parent"
+            app:stepIndicatorSize="24dp"
+            app:stepProgressLineThickness="6dp"
+            app:stepSelectedIndicatorSize="36dp"
+            app:stepsCount="5" />
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:currentStep="2"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView"
+            app:shownCompetedIcon="false"
+            app:stepIndicatorSize="24dp"
+            app:stepProgressLineThickness="6dp"
+            app:stepSelectedIndicatorSize="36dp"
+            app:stepsCount="5" />
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:currentStep="10"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView2"
+            app:shownCompetedIcon="true"
+            app:stepIconCompleted="@drawable/ic_checked"
+            app:stepIndicatorSize="24dp"
+            app:stepProgressLineThickness="6dp"
+            app:stepSelectedIndicatorSize="36dp"
+            app:stepsCount="5" />
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:currentStep="0"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView3"
+            app:shownCompetedIcon="true"
+            app:stepCompletedColor="@color/colorPrimaryDark"
+            app:stepIndicatorSize="32dp"
+            app:stepProgressLineCompletedColor="@color/colorPrimaryDark"
+            app:stepProgressLineThickness="2dp"
+            app:stepProgressLineUncompletedColor="@color/colorAccent"
+            app:stepSelectedIndicatorSize="48dp"
+            app:stepTextCompletedColor="@color/colorAccent"
+            app:stepTextUncompletedColor="@color/colorPrimaryDark"
+            app:stepUncompletedColor="@color/colorAccent"
+            app:stepsCount="3" />
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:currentStep="0"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView4"
+            app:shownCompetedIcon="true"
+            app:stepCompletedColor="@color/colorPrimaryDark"
+            app:stepIndicatorSize="18dp"
+            app:stepProgressLineThickness="4dp"
+            app:stepSelectedIndicatorSize="24dp"
+            app:stepTextCompletedColor="@color/colorAccent"
+            app:stepTextUncompletedColor="@color/colorPrimaryDark"
+            app:stepUncompletedColor="@color/colorAccent"
+            app:stepsCount="3" />
+
+    <LinearLayout
+            android:id="@+id/subView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stepsView5" />
+
+
+    <com.thinkup.stepsindicator.StepsView
+            android:id="@+id/stepsView6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/testList"
+            />
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/testList"
+            app:layout_constraintBottom_toTopOf="@+id/stepAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+            android:id="@+id/stepBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step Back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+            android:id="@+id/stepAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step Add view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+            android:id="@+id/stepNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Step Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
