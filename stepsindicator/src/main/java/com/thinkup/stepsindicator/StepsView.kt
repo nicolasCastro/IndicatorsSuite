@@ -34,7 +34,7 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
-    fun setConfig(stepsCount: Int, currentStep: Int, config: StepsConfig) {
+    private fun setConfig(stepsCount: Int, currentStep: Int, config: StepsConfig) {
         this.config = config
         loadItems(stepsCount, currentStep)
     }
@@ -43,13 +43,22 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
         this.callback = callback
     }
 
-    private fun loadItems(stepsCount: Int, currentStep: Int) {
-        container.weightSum = (stepsCount.toFloat() - 1) * STEP_FACTOR
+    fun loadItems(stepsCount: Int, currentStep: Int) {
+        tkupContainer.layoutParams.height = if (config.selectedSize > config.size) config.selectedSize else config.size
+        tkupContainer.weightSum = (stepsCount.toFloat() - 1) * STEP_FACTOR
         for (i in 0 until stepsCount) {
             addStepItem(i, i == 0, i == stepsCount - 1)
         }
         currentSelectedIndex = if (currentStep <= stepsCount) currentStep else stepsCount - 1
         setSelectedSteps()
+    }
+
+    fun next() {
+        selectIndex(currentSelectedIndex + 1)
+    }
+
+    fun previous() {
+        selectIndex(currentSelectedIndex - 1)
     }
 
     fun attach(view: RecyclerView) {
@@ -91,7 +100,7 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
     private fun addStepItem(index: Int, isFirst: Boolean, isLast: Boolean) {
         val stepTabItem = StepItem(context, config = config)
         tabItems.add(stepTabItem)
-        container.addView(stepTabItem)
+        tkupContainer.addView(stepTabItem)
         stepTabItem.init(index, isFirst, isLast)
         if (config.isTouchable) stepTabItem.setOnClickListener {
             val previous = currentSelectedIndex
@@ -112,14 +121,6 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
     }
 
     private fun checkIndex(index: Int) = index >= 0 && index < tabItems.size
-
-    fun next() {
-        selectIndex(currentSelectedIndex + 1)
-    }
-
-    fun previous() {
-        selectIndex(currentSelectedIndex - 1)
-    }
 
     interface Callback {
         fun onStepChanged(oldIndex: Int, newIndex: Int)

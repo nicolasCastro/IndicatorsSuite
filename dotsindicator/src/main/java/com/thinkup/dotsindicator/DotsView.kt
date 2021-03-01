@@ -2,27 +2,29 @@ package com.thinkup.dotsindicator
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.View
 import android.widget.HorizontalScrollView
+import androidx.annotation.*
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.dots_scroll_control.view.*
 import java.util.*
 
-class DotsView(context: Context, attrs: AttributeSet) :
+class DotsView(context: Context, attrs: AttributeSet? = null) :
     HorizontalScrollView(context, attrs, 0) {
 
     companion object {
-        const val DEFAULT_DELAY = 500L
-        const val LOADER_INFINITE = -1
+        private const val DEFAULT_DELAY = 500L
+        private const val LOADER_INFINITE = -1
     }
 
     private var padding: Int = 0
     private var gradient = false
     private var tabItems = mutableListOf<DotTabItem>()
     private var currentSelectedIndex: Int = 0
-    private val config: DotConfig
-    private var callback: DotsCallback? = null
+    private var config: DotConfig
+    private var callback: Callback? = null
 
     init {
         inflate(context, R.layout.dots_scroll_control, this)
@@ -47,6 +49,12 @@ class DotsView(context: Context, attrs: AttributeSet) :
         padding = resources.getDimensionPixelSize(R.dimen.dot_standard_size)
         isVerticalScrollBarEnabled = false
         isHorizontalScrollBarEnabled = false
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
+    private fun setConfig(stepsCount: Int, currentStep: Int, config: DotConfig) {
+        this.config = config
+        loadItems(stepsCount, currentStep)
     }
 
     fun loadItems(size: Int, currentIndex: Int) {
@@ -92,7 +100,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
     }
 
     private fun load(delay: Long = 500, repeatCount: Int = LOADER_INFINITE, actualRepeat: Int = 0) {
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             if (currentSelectedIndex < tabItems.size - 1) next() else selectIndex(0)
             val count =
                 if (repeatCount != LOADER_INFINITE && currentSelectedIndex == 0) actualRepeat + 1 else actualRepeat
@@ -130,7 +138,7 @@ class DotsView(context: Context, attrs: AttributeSet) :
         }
     }
 
-    fun setCallback(callback: DotsCallback) {
+    fun setCallback(callback: Callback) {
         this.callback = callback
     }
 
@@ -146,5 +154,108 @@ class DotsView(context: Context, attrs: AttributeSet) :
         val dotTabItem = DotTabItem(context, config = config)
         tabItems.add(dotTabItem)
         container.addView(dotTabItem)
+    }
+
+    interface Callback {
+        fun onIndexChange(previous: Int, current: Int)
+    }
+
+    class Builder(private val context: Context) {
+        private val config: DotConfig = DotConfig(context)
+        private var count = 0
+        private var current = 0
+        private var callback: Callback? = null
+
+        fun setUnselectedColor(@AnyRes unselectedColor: Int): Builder {
+            config.unselectedColor = unselectedColor
+            return this
+        }
+
+        fun setSelectedColor(@AnyRes selectedColor: Int): Builder {
+            config.selectedColor = selectedColor
+            return this
+        }
+
+        fun setWidth(@DimenRes size: Int): Builder {
+            config.width = config.getDefaultDimen(context, size)
+            return this
+        }
+
+        fun setSelectedWidth(@DimenRes size: Int): Builder {
+            config.selectedWidth = config.getDefaultDimen(context, size)
+            return this
+        }
+
+        fun setHeight(@DimenRes size: Int): Builder {
+            config.height = config.getDefaultDimen(context, size)
+            return this
+        }
+
+        fun setMargin(@DimenRes size: Int): Builder {
+            config.margin = config.getDefaultDimen(context, size)
+            return this
+        }
+
+        fun setDuration(duration: Int): Builder {
+            config.duration = duration
+            return this
+        }
+
+        fun setRounded(rounded: Boolean): Builder {
+            config.rounded = rounded
+            return this
+        }
+
+        fun setSteps(steps: Boolean): Builder {
+            config.steps = steps
+            return this
+        }
+
+        fun setBorder(borders: Boolean): Builder {
+            config.border = borders
+            return this
+        }
+
+        fun setGradientNearNextPercentage(gradientNearNextPercentage: Int): Builder {
+            config.gradientNearNextPercentage = gradientNearNextPercentage
+            return this
+        }
+
+        fun setGradientNearPrePercentage(gradientNearPrePercentage: Int): Builder {
+            config.gradientNearPrePercentage = gradientNearPrePercentage
+            return this
+        }
+
+        fun setGradientFarPercentage(gradientFarPercentage: Int): Builder {
+            config.gradientFarPercentage = gradientFarPercentage
+            return this
+        }
+
+        fun setGradientSelectedPercentage(gradientSelectedPercentage: Int): Builder {
+            config.gradientSelectedPercentage = gradientSelectedPercentage
+            return this
+        }
+
+        fun setStepsCount(count: Int): Builder {
+            this.count = count
+            return this
+        }
+
+        fun setCurrentIndex(index: Int): Builder {
+            this.current = index
+            return this
+        }
+
+        fun setCallback(callback: Callback): Builder {
+            this.callback = callback
+            return this
+        }
+
+        fun build(): DotsView {
+            val view = DotsView(context)
+            view.setConfig(count, current, config)
+            callback?.let { view.setCallback(it) }
+            return view
+        }
     }
 }

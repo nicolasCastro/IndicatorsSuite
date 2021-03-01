@@ -2,8 +2,9 @@ package com.thinkup.dotsindicator
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.RestrictTo
 
-class DotConfig(context: Context, attrs: AttributeSet) {
+class DotConfig(context: Context, attrs: AttributeSet? = null) {
 
     companion object {
         private const val ANIM_LARGE_DURATION = 250
@@ -51,7 +52,8 @@ class DotConfig(context: Context, attrs: AttributeSet) {
         }
     }
 
-    private fun getDefaultDimen(context: Context, id: Int): Int = context.resources.getDimensionPixelSize(id)
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
+    fun getDefaultDimen(context: Context, id: Int): Int = context.resources.getDimensionPixelSize(id)
 
     var unselectedColor: Int
         internal set

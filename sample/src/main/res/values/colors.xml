@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorAccentTranslucent">#33D81B60</color>
-
+    <color name="dark">#121b29</color>
+    <color name="light_black">#59090A0A</color>
     <color name="loader_unselected">#dcdcdc</color>
 </resources>
