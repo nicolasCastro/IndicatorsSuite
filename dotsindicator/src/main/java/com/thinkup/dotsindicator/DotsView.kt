@@ -15,8 +15,8 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
     HorizontalScrollView(context, attrs, 0) {
 
     companion object {
-        private const val DEFAULT_DELAY = 500L
-        private const val LOADER_INFINITE = -1
+        const val DEFAULT_DELAY = 500
+        const val LOADER_INFINITE = -1
     }
 
     private var padding: Int = 0
@@ -36,7 +36,7 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
                 val size = getInteger(R.styleable.DotsView_itemsCount, 0)
                 val current = getInteger(R.styleable.DotsView_currentIndex, 0)
                 if (size > 0) loadItems(size, current)
-
+                // TODO: add to the Builder
                 val loader = getBoolean(R.styleable.DotsView_loader, false)
                 val delay = getInteger(R.styleable.DotsView_loaderDelay, DEFAULT_DELAY.toInt())
                 val repeat = getInteger(R.styleable.DotsView_loaderRepeatCount, LOADER_INFINITE)
@@ -52,9 +52,19 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
-    private fun setConfig(stepsCount: Int, currentStep: Int, config: DotConfig) {
+    private fun setConfig(
+        stepsCount: Int,
+        currentStep: Int,
+        gradient: Boolean,
+        loader: Boolean,
+        delay: Int,
+        repeat: Int,
+        config: DotConfig
+    ) {
         this.config = config
         loadItems(stepsCount, currentStep)
+        this.gradient = gradient
+        if (loader) loader(delay.toLong(), repeat, currentStep)
     }
 
     fun loadItems(size: Int, currentIndex: Int) {
@@ -94,7 +104,7 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
         })
     }
 
-    fun loader(delay: Long = DEFAULT_DELAY, repeatCount: Int = LOADER_INFINITE, currentIndex: Int = 0) {
+    fun loader(delay: Long = DEFAULT_DELAY.toLong(), repeatCount: Int = LOADER_INFINITE, currentIndex: Int = 0) {
         selectIndex(currentIndex)
         load(delay, repeatCount, if (repeatCount == LOADER_INFINITE) LOADER_INFINITE else 0)
     }
@@ -164,15 +174,19 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
         private val config: DotConfig = DotConfig(context)
         private var count = 0
         private var current = 0
+        private var gradient = false
+        private var loader = false
+        private var delay = DEFAULT_DELAY.toInt()
+        private var repeat = LOADER_INFINITE
         private var callback: Callback? = null
 
-        fun setUnselectedColor(@AnyRes unselectedColor: Int): Builder {
-            config.unselectedColor = unselectedColor
+        fun setUnselectedResource(@AnyRes unselected: Int): Builder {
+            config.unselectedColor = unselected
             return this
         }
 
-        fun setSelectedColor(@AnyRes selectedColor: Int): Builder {
-            config.selectedColor = selectedColor
+        fun setSelectedResource(@AnyRes selected: Int): Builder {
+            config.selectedColor = selected
             return this
         }
 
@@ -216,6 +230,11 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
             return this
         }
 
+        fun setGradient(gradient: Boolean): Builder {
+            this.gradient = gradient
+            return this
+        }
+
         fun setGradientNearNextPercentage(gradientNearNextPercentage: Int): Builder {
             config.gradientNearNextPercentage = gradientNearNextPercentage
             return this
@@ -236,6 +255,21 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
             return this
         }
 
+        fun setLoader(loader: Boolean): Builder {
+            this.loader = loader
+            return this
+        }
+
+        fun setLoaderDelay(delay: Int): Builder {
+            this.delay = delay
+            return this
+        }
+
+        fun setRepeat(repeat: Int): Builder {
+            this.repeat = repeat
+            return this
+        }
+
         fun setStepsCount(count: Int): Builder {
             this.count = count
             return this
@@ -253,7 +287,7 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
 
         fun build(): DotsView {
             val view = DotsView(context)
-            view.setConfig(count, current, config)
+            view.setConfig(count, current, gradient, loader, delay, repeat, config)
             callback?.let { view.setCallback(it) }
             return view
         }

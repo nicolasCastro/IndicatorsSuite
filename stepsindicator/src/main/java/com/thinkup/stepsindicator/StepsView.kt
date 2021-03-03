@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thinkup.stepsindicator.ext.STEP_FACTOR
 import kotlinx.android.synthetic.main.steps_control.view.*
 
-//TODO: individual ste color, individual icons
+//TODO: individual ste color, individual icons, text size & font
 class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLayout(context, attributeSet) {
 
     private var config: StepsConfig
@@ -49,7 +49,7 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
         for (i in 0 until stepsCount) {
             addStepItem(i, i == 0, i == stepsCount - 1)
         }
-        currentSelectedIndex = if (currentStep <= stepsCount) currentStep else stepsCount - 1
+        currentSelectedIndex = if (currentStep < stepsCount) currentStep else stepsCount - 1
         setSelectedSteps()
     }
 

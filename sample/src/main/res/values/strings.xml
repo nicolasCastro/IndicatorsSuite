@@ -1,3 +1,76 @@
 <resources>
     <string name="app_name">Indicator\'s Suite</string>
+    <string name="app_steps_name">Steps Indicator</string>
+    <string name="app_dots_name">Dots Indicator</string>
+    <string name="app_title">Check ours libraries out!</string>
+    <string name="app_message">We are working to improve them and we are open to listen to you\nLet us your comments, issues or stars in our Gitlab</string>
+    <string name="app_repo_link">https://gitlab.com/thinkup-public/android-components</string>
+    <string name="app_balloon_message">Make your own %1$s!</string>
+    <string name="app_examples_message">Some examples</string>
+    <string name="app_attach_message">Attach it to a RecyclerView</string>
+    <string name="app_move_message">Move the %1$s!</string>
+    <string name="app_config_message">Choose your own\nconfiguration!</string>
+    <string name="app_config_button">Do it!</string>
+    <string name="app_create_message">Create and add programmatically!</string>
+    <string name="app_ok">Ok!</string>
+
+    <string-array name="colors_array">
+        <item>red</item>
+        <item>blue</item>
+        <item>green</item>
+        <item>yellow</item>
+        <item>orange</item>
+        <item>violet</item>
+    </string-array>
+    <string-array name="images_array">
+        <item>none</item>
+        <item>tick</item>
+        <item>full-tick</item>
+    </string-array>
+    <string-array name="dimens_array">
+        <item>16 DP</item>
+        <item>20 DP</item>
+        <item>24 DP</item>
+        <item>28 DP</item>
+        <item>32 DP</item>
+    </string-array>
+    <string-array name="thick_array">
+        <item>2 DP</item>
+        <item>4 DP</item>
+        <item>8 DP</item>
+        <item>10 DP</item>
+        <item>12 DP</item>
+    </string-array>
+    <string-array name="boolean_array">
+        <item>NO</item>
+        <item>YES</item>
+    </string-array>
+    <string-array name="steps_array">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="steps_index_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="anim_array">
+        <item>100</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2500</item>
+        <item>5000</item>
+    </string-array>
 </resources>

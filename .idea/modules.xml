@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/dotsIndicator.iml" filepath="$PROJECT_DIR$/dotsIndicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dotsindicator/dotsIndicator.dotsindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/dotsindicator/dotsIndicator.dotsindicator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/dotsIndicator.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/dotsIndicator.sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stepsindicator/dotsIndicator.stepsindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/stepsindicator/dotsIndicator.stepsindicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IndicatorsSuite.iml" filepath="$PROJECT_DIR$/.idea/modules/IndicatorsSuite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dotsindicator/IndicatorsSuite.dotsindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/dotsindicator/IndicatorsSuite.dotsindicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/IndicatorsSuite.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/IndicatorsSuite.sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/stepsindicator/IndicatorsSuite.stepsindicator.iml" filepath="$PROJECT_DIR$/.idea/modules/stepsindicator/IndicatorsSuite.stepsindicator.iml" />
     </modules>
   </component>
 </project>

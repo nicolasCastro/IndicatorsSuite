@@ -1,2 +1,3 @@
 include ':stepsindicator'
 include ':sample', ':dotsindicator'
+rootProject.name='IndicatorsSuite'
