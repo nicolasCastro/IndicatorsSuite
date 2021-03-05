@@ -1,7 +1,10 @@
 <h1 align="center">Steps Indicator</h1></br>
 
 <p align="center">
-:red_circle: :white_circle: :large_blue_circle: A lightweight steps wizard component, fully customizable.
+:red_circle: :heavy_minus_sign: :white_circle: :heavy_minus_sign: :large_blue_circle: 
+</p>
+<p align="center">
+  A lightweight steps wizard component, fully customizable.
 </p>
 </br>
 <p align="center">
@@ -10,8 +13,8 @@
 </p> <br>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/24237865/61194943-f9d70380-a6ff-11e9-807f-ba1ca8126f8a.gif" width="32%"/>
-  <img src="https://user-images.githubusercontent.com/24237865/61225579-d346b600-a75b-11e9-84f8-3c06047b5003.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110058652-7be6c680-7d41-11eb-975a-467ed2b98fec.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110058961-17783700-7d42-11eb-8e77-6c7c248e535a.gif" width="32%"/>
 </p>
 
 ## How to include it in your project
@@ -30,7 +33,7 @@ allprojects {
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation 'com.github.nicolasCastro.IndicatorsSuite:stepsindicator:1.2.0'
+    implementation 'com.github.nicolasCastro.IndicatorsSuite:stepsindicator:1.2.X'
 }
 ```
 
@@ -44,11 +47,10 @@ You can create and customize a StepView in both ways, in design view and program
 <com.thinkup.stepsindicator.StepsView
                 android:id="@+id/stepsView4"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingHorizontal="16dp"
+                android:layout_height="wrap_content"
                 app:currentStep="0"
-                app:layout_constraintTop_toBottomOf="@+id/stepsView3"
                 app:shownCompetedIcon="true"
+                app:stepIconCompleted="@drawable/tkup_completed_step"
                 app:stepCompletedColor="@color/colorPrimaryDark"
                 app:stepIndicatorSize="32dp"
                 app:stepProgressLineCompletedColor="@color/colorPrimaryDark"
@@ -58,6 +60,8 @@ You can create and customize a StepView in both ways, in design view and program
                 app:stepTextCompletedColor="@color/colorAccent"
                 app:stepTextUncompletedColor="@color/colorPrimaryDark"
                 app:stepUncompletedColor="@color/colorAccent"
+                app:animationDuration="350"
+                app:isTouchable="true"
                 app:stepsCount="3" />
 ```
 
@@ -82,6 +86,28 @@ StepsView.Builder(requireContext())
             .setCurrentIndex(0)
 ```
 
-### Params
+## Customizable Parameters
+
+<table>
+  <tr><th>Param</th>  <th>In xml</th>   <th>In Builder</th>   <th>Values</th></tr>
+  <tr><td>Completed color</td>    <td><code>app:stepCompletedColor</code></td>   <td><code>.setCompletedColor</code></td>   <td>Any color resource</td></tr>
+  <tr><td>Uncompleted color</td>      <td><code>app:stepUncompletedColor</code></td>     <td><code>.setUncompletedColor</code></td>     <td>Any color resource</td></tr>
+  <tr><td>Uncompleted Text color</td>     <td><code>app:stepTextUncompletedColor</code></td>     <td><code>.setTextCompletedColor</code></td>     <td>Any color resource</td></tr>
+  <tr><td>Selected/completed Text color</td>      <td><code>app:stepTextCompletedColor</code></td>     <td><code>.setTextUncompletedColor</code></td>     <td>Any color resource</td></tr>
+  <tr><td>Complete Icon resource</td>      <td><code>app:stepIconCompleted</code></td>     <td><code>.setIconCompleted</code></td>     <td>Any drawable resource</td></tr>
+  <tr><td>Completed Line color</td>     <td><code>app:stepProgressLineCompletedColor</code></td>     <td><code>.setLineCompletedColor</code></td>     <td>Any color resource</td></tr>
+  <tr><td>Unompleted Line color</td>      <td><code>app:stepProgressLineUncompletedColor</code></td>     <td><code>.setLineUncompletedColor</code></td>     <td>Any color resource</td></tr>
+  <tr><td>Size</td>     <td><code>app:stepIndicatorSize</code></td>     <td><code>.setSize</code></td>     <td>Any dimen resource</td></tr>
+  <tr><td>Selected Size</td>      <td><code>app:stepSelectedIndicatorSize</code></td>     <td><code>.setSelectedSize</code></td>     <td>Any dimen resource</td></tr>
+  <tr><td>Line Thickness</td>     <td><code>app:stepProgressLineThickness</code></td>     <td><code>.setLineThickness</code></td>     <td>Any dimen resource</td></tr>
+  <tr><td>Is Touchable</td>     <td><code>app:isTouchable</code></td>     <td><code>.setIsTouchable</code></td>     <td>true | false</td></tr>
+  <tr><td>Shown Competed Icon</td>    <td><code>app:shownCompetedIcon</code></td>     <td><code>.setShownCompetedIcon</code></td>   <td>true | false</td></tr>
+  <tr><td>Duration</td>   <td><code>app:animationDuration</code></td>   <td><code>.setDuration</code></td>    <td>Any integer (> 0)</td></tr>
+    <tr><td>Steps count</td>    <td><code>app:stepsCount</code></td>   <td><code>.setStepsCount</code></td>   <td>Any integer (> 0)</td></tr>
+    <tr><td>Current Selected Step</td>    <td><code>app:currentStep</code></td>   <td><code>.setCurrentIndex</code></td>      <td>Any integer</td></tr>
+</table>
 
 
+## Add a callback
+
+## Methods
