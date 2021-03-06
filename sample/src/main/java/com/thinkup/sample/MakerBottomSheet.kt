@@ -4,24 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import androidx.annotation.ArrayRes
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.thinkup.easycore.ViewRenderer
+import com.thinkup.dotsindicator.DotsView
 import com.thinkup.easylist.RendererAdapter
+import com.thinkup.sample.utils.DotSpinnerRenderer
+import com.thinkup.sample.utils.StepSpinnerRenderer
 import com.thinkup.stepsindicator.StepsView
 import kotlinx.android.synthetic.main.dialog_maker.*
-import kotlinx.android.synthetic.main.item_spinner.view.*
-
 
 class MakerBottomSheet : BottomSheetDialogFragment() {
 
     private val adapter = RendererAdapter()
-    private var callback: Callback? = null
+    private var stepViewCallback: StepViewCallback? = null
+    private var dotViewCallback: DotViewCallback? = null
 
+    private val dotBuilder: DotsView.Builder by lazy {
+        DotsView.Builder(requireContext())
+            .setWidth(R.dimen.dimen_24)
+            .setSelectedWidth(R.dimen.dimen_24)
+            .setHeight(R.dimen.dimen_24)
+            .setMargin(R.dimen.dimen_8)
+            .setSelectedResource(R.color.green)
+            .setUnselectedResource(R.color.red)
+            .setGradient(false)
+            .setGradientSelectedPercentage(100)
+            .setGradientNearNextPercentage(100)
+            .setGradientNearPrePercentage(100)
+            .setGradientFarPercentage(100)
+            .setBorder(false)
+            .setRounded(true)
+            .setSteps(false)
+            .setLoader(false)
+            .setRepeat(3)
+            .setLoaderDelay(200)
+            .setDuration(200)
+            .setStepsCount(4)
+            .setCurrentIndex(0)
+    }
     private val stepBuilder: StepsView.Builder by lazy {
         StepsView.Builder(requireContext())
             .setCompletedColor(R.color.green)
@@ -36,13 +57,17 @@ class MakerBottomSheet : BottomSheetDialogFragment() {
             .setLineThickness(R.dimen.dimen_2)
             .setIsTouchable(true)
             .setShownCompetedIcon(true)
-            .setDuration(350)
+            .setDuration(200)
             .setStepsCount(3)
             .setCurrentIndex(0)
     }
 
-    interface Callback {
+    interface StepViewCallback {
         fun onCreateView(stepBuilder: StepsView.Builder)
+    }
+
+    interface DotViewCallback {
+        fun onCreateView(dotBuilder: DotsView.Builder)
     }
 
     companion object {
@@ -57,8 +82,13 @@ class MakerBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    fun show(fragmentManager: FragmentManager, callback: Callback) {
-        this.callback = callback
+    fun show(fragmentManager: FragmentManager, stepViewCallback: StepViewCallback) {
+        this.stepViewCallback = stepViewCallback
+        show(fragmentManager, MAKER_BOTTOM_SHEET)
+    }
+
+    fun show(fragmentManager: FragmentManager, dotViewCallback: DotViewCallback) {
+        this.dotViewCallback = dotViewCallback
         show(fragmentManager, MAKER_BOTTOM_SHEET)
     }
 
@@ -72,30 +102,67 @@ class MakerBottomSheet : BottomSheetDialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         builderList.layoutManager = LinearLayoutManager(context)
-        adapter.addRenderer(SpinnerRenderer(this::onTypeSelectedValue))
         builderList.adapter = adapter
-        val type = arguments?.getString(TYPE).orEmpty()
-        adapter.setItems(StepTypes.values().map { SpinnerRenderer.Item(it, it.default) })
-        doItButton.setOnClickListener { callback?.onCreateView(stepBuilder) }
+        when (arguments?.getString(TYPE).orEmpty()) {
+            getString(R.string.app_steps_name) -> createStepDialog()
+            else -> createDotDialog()
+        }
     }
 
-    private fun onTypeSelectedValue(item: StepTypes, value: String, position: Int) {
+    private fun createDotDialog() {
+        adapter.addRenderer(DotSpinnerRenderer(this::onTypeSelectedValue))
+        adapter.setItems(DotSpinnerRenderer.Types.values().map { DotSpinnerRenderer.Item(it, it.default) })
+        doItButton.setOnClickListener { dotViewCallback?.onCreateView(dotBuilder) }
+    }
+
+    private fun createStepDialog() {
+        adapter.addRenderer(StepSpinnerRenderer(this::onTypeSelectedValue))
+        adapter.setItems(StepSpinnerRenderer.Types.values().map { StepSpinnerRenderer.Item(it, it.default) })
+        doItButton.setOnClickListener { stepViewCallback?.onCreateView(stepBuilder) }
+    }
+
+    private fun onTypeSelectedValue(item: StepSpinnerRenderer.Types, value: String, position: Int) {
         when (item) {
-            StepTypes.COMPLETEDCOLOR -> stepBuilder.setCompletedColor(getColor(position))
-            StepTypes.UNCOMPLETEDCOLOR -> stepBuilder.setUncompletedColor(getColor(position))
-            StepTypes.TEXTCOMPLETEDCOLOR -> stepBuilder.setTextCompletedColor(getColor(position))
-            StepTypes.TEXTUNCOMPLETEDCOLOR -> stepBuilder.setTextUncompletedColor(getColor(position))
-            StepTypes.ICONCOMPLETED -> stepBuilder.setIconCompleted(getDrawable(position))
-            StepTypes.LINECOMPLETEDCOLOR -> stepBuilder.setLineCompletedColor(getColor(position))
-            StepTypes.LINEUNCOMPLETEDCOLOR -> stepBuilder.setLineUncompletedColor(getColor(position))
-            StepTypes.SELECTEDSIZE -> stepBuilder.setSelectedSize(getDimen(position))
-            StepTypes.SIZE -> stepBuilder.setSize(getDimen(position))
-            StepTypes.LINETHICKNESS -> stepBuilder.setLineThickness(getSmallDimen(position))
-            StepTypes.ISTOUCHABLE -> stepBuilder.setIsTouchable(getBoolean(position))
-            StepTypes.SHOWNCOMPETEDICON -> stepBuilder.setShownCompetedIcon(getBoolean(position))
-            StepTypes.DURATION -> stepBuilder.setDuration(value.toInt())
-            StepTypes.STEPSCOUNT -> stepBuilder.setStepsCount(value.toInt())
-            StepTypes.CURRENTINDEX -> stepBuilder.setCurrentIndex(value.toInt() - 1)
+            StepSpinnerRenderer.Types.COMPLETEDCOLOR -> stepBuilder.setCompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.UNCOMPLETEDCOLOR -> stepBuilder.setUncompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.TEXTCOMPLETEDCOLOR -> stepBuilder.setTextCompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.TEXTUNCOMPLETEDCOLOR -> stepBuilder.setTextUncompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.ICONCOMPLETED -> stepBuilder.setIconCompleted(getDrawable(position))
+            StepSpinnerRenderer.Types.LINECOMPLETEDCOLOR -> stepBuilder.setLineCompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.LINEUNCOMPLETEDCOLOR -> stepBuilder.setLineUncompletedColor(getColor(position))
+            StepSpinnerRenderer.Types.SELECTEDSIZE -> stepBuilder.setSelectedSize(getDimen(position))
+            StepSpinnerRenderer.Types.SIZE -> stepBuilder.setSize(getDimen(position))
+            StepSpinnerRenderer.Types.LINETHICKNESS -> stepBuilder.setLineThickness(getSmallDimen(position))
+            StepSpinnerRenderer.Types.ISTOUCHABLE -> stepBuilder.setIsTouchable(getBoolean(position))
+            StepSpinnerRenderer.Types.SHOWNCOMPETEDICON -> stepBuilder.setShownCompetedIcon(getBoolean(position))
+            StepSpinnerRenderer.Types.DURATION -> stepBuilder.setDuration(value.toInt())
+            StepSpinnerRenderer.Types.STEPSCOUNT -> stepBuilder.setStepsCount(value.toInt())
+            StepSpinnerRenderer.Types.CURRENTINDEX -> stepBuilder.setCurrentIndex(value.toInt() - 1)
+        }
+    }
+
+    private fun onTypeSelectedValue(item: DotSpinnerRenderer.Types, value: String, position: Int) {
+        when (item) {
+            DotSpinnerRenderer.Types.WIDTH -> dotBuilder.setWidth(getDimen(position))
+            DotSpinnerRenderer.Types.SELECTEDWIDTH -> dotBuilder.setSelectedWidth(getDimen(position))
+            DotSpinnerRenderer.Types.HEIGHT -> dotBuilder.setHeight(getDimen(position))
+            DotSpinnerRenderer.Types.MARGIN -> dotBuilder.setMargin(getDimen(position))
+            DotSpinnerRenderer.Types.SELECTEDRESOURCE -> dotBuilder.setSelectedResource(getColor(position))
+            DotSpinnerRenderer.Types.UNSELECTEDRESOURCE -> dotBuilder.setUnselectedResource(getColor(position))
+            DotSpinnerRenderer.Types.GRADIENT -> dotBuilder.setGradient(getBoolean(position))
+            DotSpinnerRenderer.Types.GRADIENTSELECTEDPERCENTAGE -> dotBuilder.setGradientSelectedPercentage(value.toInt())
+            DotSpinnerRenderer.Types.GRADIENTNEARNEXTPERCENTAGE -> dotBuilder.setGradientNearNextPercentage(value.toInt())
+            DotSpinnerRenderer.Types.GRADIENTNEARPREPERCENTAGE -> dotBuilder.setGradientNearPrePercentage(value.toInt())
+            DotSpinnerRenderer.Types.GRADIENTFARPERCENTAGE -> dotBuilder.setGradientFarPercentage(value.toInt())
+            DotSpinnerRenderer.Types.BORDER -> dotBuilder.setBorder(getBoolean(position))
+            DotSpinnerRenderer.Types.ROUNDED -> dotBuilder.setRounded(getBoolean(position))
+            DotSpinnerRenderer.Types.STEPS -> dotBuilder.setSteps(getBoolean(position))
+            DotSpinnerRenderer.Types.LOADER -> dotBuilder.setLoader(getBoolean(position))
+            DotSpinnerRenderer.Types.REPEAT -> dotBuilder.setRepeat(value.toInt())
+            DotSpinnerRenderer.Types.LOADERDELAY -> dotBuilder.setLoaderDelay(value.toInt())
+            DotSpinnerRenderer.Types.DURATION -> dotBuilder.setDuration(value.toInt())
+            DotSpinnerRenderer.Types.STEPSCOUNT -> dotBuilder.setStepsCount(value.toInt())
+            DotSpinnerRenderer.Types.CURRENTINDEX -> dotBuilder.setCurrentIndex(value.toInt() - 1)
         }
     }
 
@@ -143,50 +210,5 @@ class MakerBottomSheet : BottomSheetDialogFragment() {
             2 -> R.drawable.ic_checked
             else -> 0
         }
-    }
-
-
-    class SpinnerRenderer(val callback: SpinnerCallback) : ViewRenderer<SpinnerRenderer.Item, View>(Item::class) {
-
-        override fun create(parent: ViewGroup): View = inflate(R.layout.item_spinner, parent, false)
-
-        override fun bind(view: View, model: Item, position: Int) {
-            val items = view.resources.getStringArray(model.stepTypes.array)
-            view.spinnerTitle.text = model.stepTypes.title
-            val spinnerArrayAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_item, items)
-            view.spinnerView.adapter = spinnerArrayAdapter
-            view.spinnerView.setSelection(model.position)
-            view.spinnerView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    model.position = position
-                    callback(model.stepTypes, items[position], position)
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-        }
-
-        class Item(
-            val stepTypes: StepTypes,
-            var position: Int = 0
-        )
-    }
-
-    enum class StepTypes(val title: String, @ArrayRes val array: Int, val default: Int) {
-        COMPLETEDCOLOR("Step completed color", R.array.colors_array, 2),
-        UNCOMPLETEDCOLOR("Step uncompleted color", R.array.colors_array, 1),
-        TEXTCOMPLETEDCOLOR("Text completed color", R.array.colors_array, 3),
-        TEXTUNCOMPLETEDCOLOR("Text uncompleted color", R.array.colors_array, 3),
-        ICONCOMPLETED("Icon completed", R.array.images_array, 1),
-        LINECOMPLETEDCOLOR("Line completed color", R.array.colors_array, 2),
-        LINEUNCOMPLETEDCOLOR("Line uncompleted color", R.array.colors_array, 1),
-        SELECTEDSIZE("Step focused size", R.array.dimens_array, 2),
-        SIZE("Step unfocused size", R.array.dimens_array, 1),
-        LINETHICKNESS("Line thickness", R.array.thick_array, 0),
-        ISTOUCHABLE("Steps touchable", R.array.boolean_array, 1),
-        SHOWNCOMPETEDICON("Show icon on completed step", R.array.boolean_array, 1),
-        DURATION("Animation duration", R.array.anim_array, 1),
-        STEPSCOUNT("Steps count", R.array.steps_array, 1),
-        CURRENTINDEX("Current selected step", R.array.steps_index_array, 0)
     }
 }

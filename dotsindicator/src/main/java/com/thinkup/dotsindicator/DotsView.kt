@@ -36,7 +36,6 @@ class DotsView(context: Context, attrs: AttributeSet? = null) :
                 val size = getInteger(R.styleable.DotsView_itemsCount, 0)
                 val current = getInteger(R.styleable.DotsView_currentIndex, 0)
                 if (size > 0) loadItems(size, current)
-                // TODO: add to the Builder
                 val loader = getBoolean(R.styleable.DotsView_loader, false)
                 val delay = getInteger(R.styleable.DotsView_loaderDelay, DEFAULT_DELAY.toInt())
                 val repeat = getInteger(R.styleable.DotsView_loaderRepeatCount, LOADER_INFINITE)

@@ -11,14 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.skydoves.balloon.*
+import com.thinkup.sample.utils.DotSpinnerRenderer
+import com.thinkup.sample.utils.StepSpinnerRenderer
+import com.thinkup.sample.utils.TestAdapter
 import com.thinkup.stepsindicator.StepsView
 import com.thinkup.stepsindicator.ext.toLinear
 import kotlinx.android.synthetic.main.activity_steps.*
 import kotlinx.android.synthetic.main.activity_steps.testList
 
-typealias SpinnerCallback = (MakerBottomSheet.StepTypes, String, Int) -> Unit
+typealias DotSpinnerCallback = (DotSpinnerRenderer.Types, String, Int) -> Unit
+typealias StepSpinnerCallback = (StepSpinnerRenderer.Types, String, Int) -> Unit
 
-class StepsActivity : AppCompatActivity(), StepsView.Callback, MakerBottomSheet.Callback {
+class StepsActivity : AppCompatActivity(), StepsView.Callback, MakerBottomSheet.StepViewCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTitle(R.string.app_steps_name)

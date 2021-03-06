@@ -2,130 +2,263 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/containerDots"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/testList"
+    <LinearLayout
+            android:id="@+id/sampleContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dashed_border"
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/dots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="20dp"
+                app:dotHeight="20dp"
+                app:dotMargin="15dp"
+                app:dotSelectedColor="@color/colorAccent"
+                app:dotSelectedWidth="50dp"
+                app:dotUnselectedColor="@color/colorPrimary"
+                app:dotWidth="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dotsRec" />
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/loader2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                app:dotHeight="18dp"
+                app:dotMargin="8dp"
+                app:dotSelectedColor="@drawable/gradient"
+                app:dotSelectedWidth="28dp"
+                app:dotUnselectedColor="@color/loader_unselected"
+                app:dotWidth="18dp"
+                app:itemsCount="4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dots"
+                app:loader="true"
+                app:rounded="false" />
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/loader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                app:dotHeight="18dp"
+                app:dotMargin="8dp"
+                app:dotSelectedColor="@drawable/gradient"
+                app:dotSelectedWidth="18dp"
+                app:dotUnselectedColor="@color/loader_unselected"
+                app:dotWidth="18dp"
+                app:itemsCount="4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dots"
+                app:loader="true"
+                app:rounded="false" />
+
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/loaderGradient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="20dp"
+                app:animationDuration="0"
+                app:borders="false"
+                app:dotHeight="10dp"
+                app:dotMargin="8dp"
+                app:dotSelectedColor="@color/dark"
+                app:dotSelectedWidth="10dp"
+                app:dotUnselectedColor="@color/light_black"
+                app:dotWidth="10dp"
+                app:gradient="true"
+                app:gradientFarPercentage="20"
+                app:gradientNearNextPercentage="80"
+                app:gradientNearPrePercentage="60"
+                app:gradientSelectedPercentage="100"
+                app:itemsCount="6"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loader"
+                app:loader="true"
+                app:loaderDelay="250"
+                app:rounded="true" />
+
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@color/white"
+            android:paddingHorizontal="8dp"
+            android:text="@string/app_examples_message"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <com.thinkup.dotsindicator.DotsView
-            android:id="@+id/dotsRec"
+    <Button
+            android:id="@+id/dotsBack"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:borders="false"
-            app:dotHeight="20dp"
-            app:dotMargin="15dp"
-            app:dotSelectedColor="@color/colorPrimary"
-            app:dotSelectedWidth="50dp"
-            app:dotUnselectedColor="@color/colorPrimary"
-            app:dotWidth="20dp"
-            app:gradient="true"
-            app:gradientFarPercentage="70"
-            app:gradientNearNextPercentage="85"
-            app:gradientNearPrePercentage="30"
-            app:gradientSelectedPercentage="100"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/testList" />
-
-    <TextView
-            android:id="@+id/testNextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dotsRec" />
-
-    <TextView
-            android:id="@+id/testPreviousView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Previous"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dotsRec" />
-
-    <com.thinkup.dotsindicator.DotsView
-            android:id="@+id/dots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:dotHeight="20dp"
-            app:dotMargin="15dp"
-            app:dotSelectedColor="@color/colorAccent"
-            app:dotSelectedWidth="50dp"
-            app:dotUnselectedColor="@color/colorPrimary"
-            app:dotWidth="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dotsRec" />
-
-
-    <com.thinkup.dotsindicator.DotsView
-            android:id="@+id/loader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="40dp"
-            app:dotHeight="18dp"
-            app:dotMargin="8dp"
-            app:dotSelectedColor="@drawable/gradient"
-            app:dotSelectedWidth="18dp"
-            app:dotUnselectedColor="@color/loader_unselected"
-            app:dotWidth="18dp"
-            app:itemsCount="4"
-            app:layout_constraintTop_toBottomOf="@+id/dots"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:loader="true"
-            app:rounded="false" />
-
-    <com.thinkup.dotsindicator.DotsView
-            android:id="@+id/loaderGradient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="40dp"
-            app:dotSelectedColor="@color/dark"
-            app:dotUnselectedColor="@color/light_black"
-            app:animationDuration="0"
-            app:dotMargin="8dp"
-            app:itemsCount="3"
-            app:loader="true"
-            app:loaderDelay="250"
-            app:rounded="true"
-            app:dotSelectedWidth="10dp"
-            app:dotHeight="10dp"
-            app:dotWidth="10dp"
-            app:borders="false"
-            app:gradient="true"
-            app:gradientSelectedPercentage="100"
-            app:gradientNearNextPercentage="80"
-            app:gradientNearPrePercentage="60"
-            app:gradientFarPercentage="20"
-            app:layout_constraintTop_toBottomOf="@+id/loader"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="8dp"/>
-
-    <LinearLayout
-            android:id="@+id/subView"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:background="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="10dp"
+            android:text="Back"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loaderGradient" />
+            app:layout_constraintTop_toBottomOf="@+id/sampleContainer" />
+
+    <TextView
+            android:id="@+id/movesMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingHorizontal="8dp"
+            android:text="@string/app_move_message"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/dotsBack"
+            app:layout_constraintEnd_toStartOf="@id/dotsNext"
+            app:layout_constraintStart_toEndOf="@+id/dotsBack"
+            app:layout_constraintTop_toBottomOf="@+id/sampleContainer" />
 
     <Button
-            android:id="@+id/dotsAdd"
+            android:id="@+id/dotsNext"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dots Add view"
+            android:layout_marginHorizontal="10dp"
+            android:text="Next"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sampleContainer" />
+
+    <LinearLayout
+            android:id="@+id/attachContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dashed_border"
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/dotsBack">
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/dotsRec2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:borders="false"
+                app:dotHeight="20dp"
+                app:dotMargin="15dp"
+                app:dotSelectedColor="@color/colorAccent"
+                app:dotSelectedWidth="20dp"
+                app:dotUnselectedColor="@color/colorPrimary"
+                app:dotWidth="20dp"
+                app:steps="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testList" />
+
+        <com.thinkup.dotsindicator.DotsView
+                android:id="@+id/dotsRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:borders="false"
+                app:dotHeight="20dp"
+                app:dotMargin="15dp"
+                app:dotSelectedColor="@color/colorAccent"
+                app:dotSelectedWidth="50dp"
+                app:dotUnselectedColor="@color/colorPrimary"
+                app:dotWidth="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/testList" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/testList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@color/white"
+            android:paddingHorizontal="8dp"
+            android:text="@string/app_attach_message"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/attachContainer"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/attachContainer" />
+
+    <LinearLayout
+            android:id="@+id/addContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/dashed_border"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:paddingStart="10dp"
+            android:weightSum="10"
+            app:layout_constraintTop_toBottomOf="@+id/attachContainer">
+
+        <LinearLayout
+                android:id="@+id/subView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stepsView5" />
+
+
+        <Button
+                android:id="@+id/dotsAdd"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:background="@color/white"
+            android:paddingHorizontal="8dp"
+            android:text="@string/app_create_message"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/addContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/addContainer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

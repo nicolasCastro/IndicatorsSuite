@@ -1,9 +1,10 @@
-package com.thinkup.sample
+package com.thinkup.sample.utils
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.thinkup.sample.R
 import kotlinx.android.synthetic.main.test_item.view.*
 
 class TestAdapter(private val items: List<String> = listOf("Item1", "Item2", "Item3")) :

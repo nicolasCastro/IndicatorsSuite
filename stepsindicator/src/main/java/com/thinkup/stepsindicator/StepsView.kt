@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thinkup.stepsindicator.ext.STEP_FACTOR
 import kotlinx.android.synthetic.main.steps_control.view.*
 
-//TODO: individual ste color, individual icons, text size & font
+//TODO: individual state color, individual icons, text size & font
 class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLayout(context, attributeSet) {
 
     private var config: StepsConfig
