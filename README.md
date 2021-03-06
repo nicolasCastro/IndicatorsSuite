@@ -110,4 +110,26 @@ StepsView.Builder(requireContext())
 
 ## Add a callback
 
+If you want to perform an action when users touch your StepView, you can add a callback calling ```setCallback``` on your view and passing in a **StepsView.Callback** implementation.
+
+```
+interface Callback {
+    fun onStepChanged(oldIndex: Int, newIndex: Int)
+}
+```
+When the user changes step you will receive a notification to the onStepChanged method with the index that has been abandoned and which has been taken.
+
+Also you can passing it when you are using the **StepView.Builder** calling ```.setCallback```.
+
 ## Methods
+
+```.loadItems```: You can change your step items on runtime calling this method. Only you need pass is the steps total count and the selected index after load.
+
+```.next```: Move to the next index available (if the last index is selected, no changes were applied).
+
+```.previous```: Move to the previous index available (if the first index is selected, no changes were applied).
+
+```.attach```: If you want to move your **StepView** along with your RecyclerView, you can do so by attaching your RecyclerView by calling this method.
+
+```.setSelectedSteps```: Also if you want change the selected item on runtime can use this method passing the index you want.
+
