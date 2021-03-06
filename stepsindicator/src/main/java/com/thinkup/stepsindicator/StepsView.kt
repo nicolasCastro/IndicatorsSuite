@@ -54,11 +54,15 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
     }
 
     fun next() {
+        val previous = currentSelectedIndex
         selectIndex(currentSelectedIndex + 1)
+        callback?.onStepChanged(previous, currentSelectedIndex)
     }
 
     fun previous() {
+        val previous = currentSelectedIndex
         selectIndex(currentSelectedIndex - 1)
+        callback?.onStepChanged(previous, currentSelectedIndex)
     }
 
     fun attach(view: RecyclerView) {
@@ -84,7 +88,7 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
         }
     }
 
-    private fun setSelectedSteps(index: Int) {
+    fun setSelectedSteps(index: Int) {
         val previous = currentSelectedIndex
         currentSelectedIndex = index
         if (previous < currentSelectedIndex)
