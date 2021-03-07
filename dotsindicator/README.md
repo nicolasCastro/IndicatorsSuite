@@ -105,21 +105,32 @@ DotsView.Builder(context)
 
 <table>
   <tr><th>Param</th>  <th>In xml</th>   <th>In Builder</th>   <th>Values</th></tr>
-  <tr><td>Completed color</td>    <td><code>app:stepCompletedColor</code></td>   <td><code>.setCompletedColor</code></td>   <td>Any color resource</td></tr>
-  <tr><td>Uncompleted color</td>      <td><code>app:stepUncompletedColor</code></td>     <td><code>.setUncompletedColor</code></td>     <td>Any color resource</td></tr>
-  <tr><td>Uncompleted Text color</td>     <td><code>app:stepTextUncompletedColor</code></td>     <td><code>.setTextCompletedColor</code></td>     <td>Any color resource</td></tr>
-  <tr><td>Selected/completed Text color</td>      <td><code>app:stepTextCompletedColor</code></td>     <td><code>.setTextUncompletedColor</code></td>     <td>Any color resource</td></tr>
-  <tr><td>Complete Icon resource</td>      <td><code>app:stepIconCompleted</code></td>     <td><code>.setIconCompleted</code></td>     <td>Any drawable resource</td></tr>
-  <tr><td>Completed Line color</td>     <td><code>app:stepProgressLineCompletedColor</code></td>     <td><code>.setLineCompletedColor</code></td>     <td>Any color resource</td></tr>
-  <tr><td>Unompleted Line color</td>      <td><code>app:stepProgressLineUncompletedColor</code></td>     <td><code>.setLineUncompletedColor</code></td>     <td>Any color resource</td></tr>
-  <tr><td>Size</td>     <td><code>app:stepIndicatorSize</code></td>     <td><code>.setSize</code></td>     <td>Any dimen resource</td></tr>
-  <tr><td>Selected Size</td>      <td><code>app:stepSelectedIndicatorSize</code></td>     <td><code>.setSelectedSize</code></td>     <td>Any dimen resource</td></tr>
-  <tr><td>Line Thickness</td>     <td><code>app:stepProgressLineThickness</code></td>     <td><code>.setLineThickness</code></td>     <td>Any dimen resource</td></tr>
-  <tr><td>Is Touchable</td>     <td><code>app:isTouchable</code></td>     <td><code>.setIsTouchable</code></td>     <td>true | false</td></tr>
-  <tr><td>Shown Competed Icon</td>    <td><code>app:shownCompetedIcon</code></td>     <td><code>.setShownCompetedIcon</code></td>   <td>true | false</td></tr>
+  
+  <tr><td>Dot width</td>    <td><code>app:dotWidth</code></td>   <td><code>.setWidth</code></td>   <td>Any dimen resource</td></tr>
+  <tr><td>Selected dot width</td>    <td><code>app:dotSelectedWidth</code></td>   <td><code>.setSelectedWidth</code></td>   <td>Any dimen resource</td></tr>
+  <tr><td>Dot height</td>    <td><code>app:dotHeight</code></td>   <td><code>.setHeight</code></td>   <td>Any dimen resource</td></tr>
+  <tr><td>Dot margins</td>    <td><code>app:dotMargin</code></td>   <td><code>.setMargin</code></td>   <td>Any dimen resource</td></tr>
+
+  <tr><td>Selected color</td>    <td><code>app:dotSelectedColor</code></td>   <td><code>.setSelectedResource</code></td>   <td>Any color resource</td></tr>
+  <tr><td>Unselected color</td>      <td><code>app:dotUnselectedColor</code></td>     <td><code>.setUnselectedResource</code></td>     <td>Any color resource</td></tr>
+  
+   <tr><td>Use gradient sequence</td>     <td><code>app:gradient</code></td>     <td><code>.setGradient</code></td>     <td>true | false</td></tr>
+   <tr><td>Alpha(%) to select dot</td>     <td><code>app:gradientSelectedPercentage</code></td>     <td><code>.setGradientSelectedPercentage</code></td>     <td>0-100</td></tr>
+   <tr><td>Alpha(%) to next dot</td>     <td><code>app:gradientNearNextPercentage</code></td>     <td><code>.setGradientNearNextPercentage</code></td>     <td>0-100</td></tr>
+   <tr><td>Alpha(%) to previous dot</td>     <td><code>app:gradientNearPrePercentage</code></td>     <td><code>.setGradientNearPrePercentage</code></td>     <td>0-100</td></tr>
+   <tr><td>Alpha(%) to aother dots</td>     <td><code>app:gradientFarPercentage</code></td>     <td><code>.setGradientFarPercentage</code></td>     <td>0-100</td></tr>
+   
+   
+  <tr><td>Shown borndes</td>    <td><code>app:borders</code></td>     <td><code>.setBorder</code></td>   <td>true | false</td></tr>
+  <tr><td>Shown rounded dots</td>    <td><code>app:rounded</code></td>     <td><code>.setRounded</code></td>   <td>true | false</td></tr>
+  <tr><td>Shown as steps</td>    <td><code>app:steps</code></td>     <td><code>.setSteps</code></td>   <td>true | false</td></tr>
+  <tr><td>Shown as loader</td>    <td><code>app:loader</code></td>     <td><code>.setLoader</code></td>   <td>true | false</td></tr>
+   
+  <tr><td>Repeat loader count</td>   <td><code>app:loaderRepeatCount</code></td>   <td><code>.setRepeat</code></td>    <td>Any integer (> 0)</td></tr> 
+  <tr><td>Loader delay(ms)</td>   <td><code>app:loaderDelay</code></td>   <td><code>.setLoaderDelay</code></td>    <td>Any integer (> 0)</td></tr> 
   <tr><td>Duration</td>   <td><code>app:animationDuration</code></td>   <td><code>.setDuration</code></td>    <td>Any integer (> 0)</td></tr>
-    <tr><td>Steps count</td>    <td><code>app:stepsCount</code></td>   <td><code>.setStepsCount</code></td>   <td>Any integer (> 0)</td></tr>
-    <tr><td>Current Selected Step</td>    <td><code>app:currentStep</code></td>   <td><code>.setCurrentIndex</code></td>      <td>Any integer</td></tr>
+  <tr><td>Steps count</td>    <td><code>app:itemsCount</code></td>   <td><code>.setStepsCount</code></td>   <td>Any integer (> 0)</td></tr>
+  <tr><td>Current selected index</td>    <td><code>app:currentIndex</code></td>   <td><code>.setCurrentIndex</code></td>      <td>Any integer</td></tr>
 </table>
 
 
