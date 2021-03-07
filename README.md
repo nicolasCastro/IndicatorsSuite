@@ -42,12 +42,14 @@ dependencies {
 
 <p align="center">Read more about this module <a href="/dotsindicator/README.md">here</a></p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/7327610/110058652-7be6c680-7d41-11eb-975a-467ed2b98fec.gif" width="32%"/>
-  <img src="https://user-images.githubusercontent.com/7327610/110058961-17783700-7d42-11eb-8e77-6c7c248e535a.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110218399-6afc9900-7e98-11eb-81a1-8027d527d623.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110218401-6f28b680-7e98-11eb-94aa-0ca8a4702612.gif" width="32%"/>
 </p>
 <h2 align="center">Steps Indicator</h2></br>
 <p align="center">Read more about this module <a href="/stepsindicator/README.md">here</a></p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/7327610/110218399-6afc9900-7e98-11eb-81a1-8027d527d623.gif" width="32%"/>
-  <img src="https://user-images.githubusercontent.com/7327610/110218401-6f28b680-7e98-11eb-94aa-0ca8a4702612.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110058652-7be6c680-7d41-11eb-975a-467ed2b98fec.gif" width="32%"/>
+  <img src="https://user-images.githubusercontent.com/7327610/110058961-17783700-7d42-11eb-8e77-6c7c248e535a.gif" width="32%"/>
 </p>
+
+
