@@ -15,7 +15,8 @@
         <attr name="borders" format="boolean" />
         <attr name="stepsCount" format="integer" />
         <attr name="currentStep" format="integer" />
-        <attr name="shownCompetedIcon" format="boolean" />
+        <attr name="shownCompletedIcon" format="boolean" />
+        <attr name="shownUncompletedResource" format="boolean" />
         <attr name="isTouchable" format="boolean" />
     </declare-styleable>
 </resources>
