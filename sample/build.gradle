@@ -42,8 +42,8 @@ dependencies {
 
     debugImplementation project(':dotsindicator')
     debugImplementation project(':stepsindicator')
-    releaseImplementation 'com.github.nicolasCastro.IndicatorsSuite:stepsindicator:1.2.0'
-    releaseImplementation 'com.github.nicolasCastro.IndicatorsSuite:dotsindicator:1.2.0'
+    releaseImplementation 'com.github.nicolasCastro.IndicatorsSuite:stepsindicator:1.2.3'
+    releaseImplementation 'com.github.nicolasCastro.IndicatorsSuite:dotsindicator:1.2.3'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.github.nicolasCastro.easy-list:easylist:0.1.5'
