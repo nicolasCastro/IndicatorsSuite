@@ -26,7 +26,8 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
                 iconCompleted = getResourceId(R.styleable.StepsView_stepIconCompleted, R.drawable.tkup_completed_step)
                 duration = getInt(R.styleable.StepsView_animationDuration, ANIM_DEFAULT_VALUE.toInt())
                 border = getBoolean(R.styleable.StepsView_borders, true)
-                shownCompetedIcon = getBoolean(R.styleable.StepsView_shownCompetedIcon, true)
+                shownCompletedIcon = getBoolean(R.styleable.StepsView_shownCompletedIcon, true)
+                shownUncompletedResource = getBoolean(R.styleable.StepsView_shownUncompletedResource, true)
                 isTouchable = getBoolean(R.styleable.StepsView_isTouchable, true)
             }
         }
@@ -59,7 +60,9 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
         internal set
     var border: Boolean
         internal set
-    var shownCompetedIcon: Boolean
+    var shownCompletedIcon: Boolean
+        internal set
+    var shownUncompletedResource: Boolean
         internal set
     var isTouchable: Boolean
         internal set

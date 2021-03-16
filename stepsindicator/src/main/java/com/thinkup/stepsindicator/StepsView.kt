@@ -197,7 +197,12 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
         }
 
         fun setShownCompetedIcon(show: Boolean): Builder {
-            config.shownCompetedIcon = show
+            config.shownCompletedIcon = show
+            return this
+        }
+
+        fun setShownUncompletedResource(show: Boolean): Builder {
+            config.shownUncompletedResource = show
             return this
         }
 

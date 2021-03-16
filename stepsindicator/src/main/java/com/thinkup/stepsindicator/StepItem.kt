@@ -53,6 +53,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlText.setTextColor(makeSelectorTextColor())
         tkupStepsControlText.isEnabled = false
         tkupStepsControlIcon.isVisible = false
+        tkupStepsControlText.isVisible = config.shownUncompletedResource
         tkupStepsControlIcon.setImageResource(config.iconCompleted)
     }
 
@@ -86,8 +87,8 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlText.isEnabled = selected || completed
         changeBackground(selected || completed, config.border)
         scaleItem(tkupStepsControlItemView, selected)
-        if (config.shownCompetedIcon) scaleItem(tkupStepsControlIcon, !completed) { tkupStepsControlIcon.isVisible = completed }
-        if (config.shownCompetedIcon) scaleItem(tkupStepsControlText, !completed) { tkupStepsControlText.isVisible = !completed }
+        if (config.shownCompletedIcon) scaleItem(tkupStepsControlIcon, !completed) { tkupStepsControlIcon.isVisible = completed }
+        if (config.shownCompletedIcon) scaleItem(tkupStepsControlText, !completed) { tkupStepsControlText.isVisible = !completed }
     }
 
     private fun changeBackground(selected: Boolean, border: Boolean) {

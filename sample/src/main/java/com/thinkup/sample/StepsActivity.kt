@@ -73,6 +73,7 @@ class StepsActivity : AppCompatActivity(), StepsView.Callback, MakerBottomSheet.
                     .setIsTouchable(true)
                     .setBorder(false)
                     .setShownCompetedIcon(true)
+                    .setShownUncompletedResource(false)
                     .setDuration(350)
                     .setStepsCount(4)
                     .setCurrentIndex(0)
