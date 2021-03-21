@@ -91,8 +91,9 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
     fun setSelectedSteps(index: Int) {
         val previous = currentSelectedIndex
         currentSelectedIndex = index
+        val from = if (config.keepCompletedSize) previous else previous
         if (previous < currentSelectedIndex)
-            for (i in previous..currentSelectedIndex) {
+            for (i in from..currentSelectedIndex) {
                 selectIndex(i)
             }
         else
@@ -186,6 +187,11 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
             return this
         }
 
+        fun setIconPadding(@DimenRes padding: Int): Builder {
+            config.iconPadding = padding
+            return this
+        }
+
         fun setDuration(duration: Int): Builder {
             config.duration = duration
             return this
@@ -208,6 +214,11 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
 
         fun setIsTouchable(isTouchable: Boolean): Builder {
             config.isTouchable = isTouchable
+            return this
+        }
+
+        fun setKeepCompletedSize(keepCompletedSize: Boolean): Builder {
+            config.keepCompletedSize = keepCompletedSize
             return this
         }
 

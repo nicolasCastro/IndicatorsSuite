@@ -19,6 +19,7 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
                 uncompletedColor = getResourceId(R.styleable.StepsView_stepUncompletedColor, R.color.step_uncompleted)
                 lineThickness =
                     getDimensionPixelSize(R.styleable.StepsView_stepProgressLineThickness, getDefaultDimen(context, R.dimen.step_line_thickness))
+                iconPadding = getDimensionPixelSize(R.styleable.StepsView_iconPadding, getDefaultDimen(context, R.dimen.step_icon_padding))
                 lineCompletedColor = getResourceId(R.styleable.StepsView_stepProgressLineCompletedColor, R.color.step_completed)
                 lineUncompletedColor = getResourceId(R.styleable.StepsView_stepProgressLineUncompletedColor, R.color.step_uncompleted)
                 textCompletedColor = getResourceId(R.styleable.StepsView_stepTextCompletedColor, R.color.step_completed_text)
@@ -29,6 +30,7 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
                 shownCompletedIcon = getBoolean(R.styleable.StepsView_shownCompletedIcon, true)
                 shownUncompletedResource = getBoolean(R.styleable.StepsView_shownUncompletedResource, true)
                 isTouchable = getBoolean(R.styleable.StepsView_isTouchable, true)
+                keepCompletedSize = getBoolean(R.styleable.StepsView_keepCompletedSize, false)
             }
         }
     }
@@ -43,6 +45,8 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
     var size: Int
         internal set
     var selectedSize: Int
+        internal set
+    var iconPadding: Int
         internal set
     var lineUncompletedColor: Int
         internal set
@@ -65,5 +69,7 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
     var shownUncompletedResource: Boolean
         internal set
     var isTouchable: Boolean
+        internal set
+    var keepCompletedSize: Boolean
         internal set
 }

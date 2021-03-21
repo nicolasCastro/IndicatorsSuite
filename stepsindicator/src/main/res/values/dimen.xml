@@ -4,5 +4,6 @@
     <dimen name="step_size">24dp</dimen>
     <dimen name="step_size_select">36dp</dimen>
     <dimen name="step_line_thickness">6dp</dimen>
+    <dimen name="step_icon_padding">6dp</dimen>
 
 </resources>

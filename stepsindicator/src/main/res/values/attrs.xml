@@ -5,6 +5,7 @@
         <attr name="stepCompletedColor" format="reference" />
         <attr name="stepIndicatorSize" format="dimension" />
         <attr name="stepSelectedIndicatorSize" format="dimension" />
+        <attr name="iconPadding" format="dimension" />
         <attr name="stepProgressLineThickness" format="dimension" />
         <attr name="stepProgressLineUncompletedColor" format="color" />
         <attr name="stepProgressLineCompletedColor" format="color" />
@@ -18,5 +19,6 @@
         <attr name="shownCompletedIcon" format="boolean" />
         <attr name="shownUncompletedResource" format="boolean" />
         <attr name="isTouchable" format="boolean" />
+        <attr name="keepCompletedSize" format="boolean" />
     </declare-styleable>
 </resources>

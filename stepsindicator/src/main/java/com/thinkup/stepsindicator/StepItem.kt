@@ -17,6 +17,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 import com.thinkup.stepsindicator.ext.*
 import kotlinx.android.synthetic.main.steps_item.view.*
 
@@ -24,10 +25,13 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
 
     constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, StepsConfig(context, attrs!!))
 
+    enum class Status { NONE, SELECTED, COMPLETED }
+
     private var fromScaleX: Float = 1.0f
     private var toScaleX: Float = 1.0f
     private var lastfactor: Int = MIN_STEP_FACTOR
     private var index: Int = 0
+    private var status: Status = StepItem.Status.NONE
 
     fun init(index: Int, isFirst: Boolean, isLast: Boolean) {
         tkupStepsControlText.text = "${index + 1}"
@@ -55,6 +59,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlIcon.isVisible = false
         tkupStepsControlText.isVisible = config.shownUncompletedResource
         tkupStepsControlIcon.setImageResource(config.iconCompleted)
+        tkupStepsControlIcon.setPadding(config.iconPadding)
     }
 
     fun setOnClickListener(action: (Int) -> Unit) {
@@ -66,7 +71,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
     }
 
     fun setItemSelected(animated: Boolean = false) {
-        setInternalItemSelected(true, false)
+        setInternalItemSelected(Status.SELECTED)
         if (!animated) tkupStepsControlProgress.animateProgress(lastfactor, duration = config.duration.toLong())
         else tkupStepsControlProgress.animateProgress(STEP_FACTOR, duration = config.duration.toLong(), reverse = true)
     }
@@ -80,15 +85,26 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
     }
 
     fun setItemDeselected(completed: Boolean) {
-        setInternalItemSelected(false, completed)
+        setInternalItemSelected(if (completed) Status.COMPLETED else Status.NONE)
     }
 
-    private fun setInternalItemSelected(selected: Boolean, completed: Boolean) {
-        tkupStepsControlText.isEnabled = selected || completed
-        changeBackground(selected || completed, config.border)
-        scaleItem(tkupStepsControlItemView, selected)
-        if (config.shownCompletedIcon) scaleItem(tkupStepsControlIcon, !completed) { tkupStepsControlIcon.isVisible = completed }
-        if (config.shownCompletedIcon) scaleItem(tkupStepsControlText, !completed) { tkupStepsControlText.isVisible = !completed }
+    private fun setInternalItemSelected(status: Status) {
+        val currentStatus = this.status
+        this.status = status
+        val from = currentStatus == Status.SELECTED && status == Status.COMPLETED
+        val xfrom = currentStatus == Status.COMPLETED
+        val completed = currentStatus == Status.COMPLETED && status == Status.COMPLETED
+        val to = currentStatus == Status.SELECTED && status == Status.NONE
+        tkupStepsControlText.isEnabled = status == Status.SELECTED || status == Status.COMPLETED
+        changeBackground(status == Status.SELECTED || status == Status.COMPLETED, config.border)
+        if (!(config.keepCompletedSize && (from || completed || (!to && currentStatus == Status.SELECTED) || (!to && xfrom))))
+            scaleItem(tkupStepsControlItemView, status == Status.SELECTED)
+        if (config.shownCompletedIcon) scaleItem(tkupStepsControlIcon, status != Status.COMPLETED) {
+            tkupStepsControlIcon.isVisible = status == Status.COMPLETED
+        }
+        if (config.shownCompletedIcon) scaleItem(tkupStepsControlText, status != Status.COMPLETED) {
+            tkupStepsControlText.isVisible = (status != Status.COMPLETED && config.shownUncompletedResource) || status == Status.SELECTED
+        }
     }
 
     private fun changeBackground(selected: Boolean, border: Boolean) {
