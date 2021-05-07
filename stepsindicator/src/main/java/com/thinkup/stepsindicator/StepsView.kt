@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.thinkup.stepsindicator.ext.STEP_FACTOR
 import kotlinx.android.synthetic.main.steps_control.view.*
@@ -179,6 +180,11 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
 
         fun setTextCompletedColor(@ColorRes color: Int): Builder {
             config.textCompletedColor = color
+            return this
+        }
+
+        fun setTextSize(@DimenRes size: Int): Builder {
+            config.stepTextSize = config.getDefaultFloatDimen(context, size)
             return this
         }
 

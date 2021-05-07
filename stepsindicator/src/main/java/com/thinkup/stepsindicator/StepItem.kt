@@ -58,6 +58,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlText.isEnabled = false
         tkupStepsControlIcon.isVisible = false
         tkupStepsControlText.isVisible = config.shownUncompletedResource
+        tkupStepsControlText.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.stepTextSize)
         tkupStepsControlIcon.setImageResource(config.iconCompleted)
         tkupStepsControlIcon.setPadding(config.iconPadding)
     }
