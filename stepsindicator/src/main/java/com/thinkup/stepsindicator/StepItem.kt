@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -59,6 +60,7 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsControlIcon.isVisible = false
         tkupStepsControlText.isVisible = config.shownUncompletedResource
         tkupStepsControlText.setTextSize(TypedValue.COMPLEX_UNIT_PX, config.stepTextSize)
+        if (config.stepTextFont != -1) tkupStepsControlText.typeface = ResourcesCompat.getFont(context, config.stepTextFont)
         tkupStepsControlIcon.setImageResource(config.iconCompleted)
         tkupStepsControlIcon.setPadding(config.iconPadding)
     }

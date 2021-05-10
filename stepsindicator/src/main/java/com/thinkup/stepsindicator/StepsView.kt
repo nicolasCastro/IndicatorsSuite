@@ -188,6 +188,11 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
             return this
         }
 
+        fun setTextFont(@FontRes font: Int): Builder {
+            config.stepTextFont = font
+            return this
+        }
+
         fun setIconCompleted(@DrawableRes icon: Int): Builder {
             config.iconCompleted = icon
             return this
