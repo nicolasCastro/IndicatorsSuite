@@ -56,6 +56,7 @@ You could create and customize a **StepView** in both ways, in design view and p
                 app:stepProgressLineCompletedColor="@color/colorPrimaryDark"
                 app:stepProgressLineThickness="2dp"
                 app:stepProgressLineUncompletedColor="@color/colorAccent"
+                app:lineMargins="24dp"
                 app:stepSelectedIndicatorSize="48dp"
                 app:stepTextCompletedColor="@color/colorAccent"
                 app:stepTextUncompletedColor="@color/colorPrimaryDark"
@@ -83,6 +84,7 @@ StepsView.Builder(requireContext())
             .setSelectedSize(R.dimen.dimen_24)
             .setSize(R.dimen.dimen_20)
             .setLineThickness(R.dimen.dimen_2)
+            .setLineMargins(R.dimen.dimen_24)
             .setIsTouchable(true)
             .setShownCompetedIcon(true)
             .setDuration(350)
@@ -107,6 +109,7 @@ StepsView.Builder(requireContext())
   <tr><td>Size</td>     <td><code>app:stepIndicatorSize</code></td>     <td><code>.setSize</code></td>     <td>Any dimen resource</td></tr>
   <tr><td>Selected Size</td>      <td><code>app:stepSelectedIndicatorSize</code></td>     <td><code>.setSelectedSize</code></td>     <td>Any dimen resource</td></tr>
   <tr><td>Line Thickness</td>     <td><code>app:stepProgressLineThickness</code></td>     <td><code>.setLineThickness</code></td>     <td>Any dimen resource</td></tr>
+  <tr><td>Line Margins</td>     <td><code>app:lineMargins</code></td>     <td><code>.setLineMargins</code></td>     <td>Any dimen resource</td></tr>
   <tr><td>Is Touchable</td>     <td><code>app:isTouchable</code></td>     <td><code>.setIsTouchable</code></td>     <td>true | false</td></tr>
   <tr><td>Shown Competed Icon</td>    <td><code>app:shownCompetedIcon</code></td>     <td><code>.setShownCompetedIcon</code></td>   <td>true | false</td></tr>
   <tr><td>Duration</td>   <td><code>app:animationDuration</code></td>   <td><code>.setDuration</code></td>    <td>Any integer (> 0)</td></tr>

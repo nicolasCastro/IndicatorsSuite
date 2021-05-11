@@ -67,7 +67,7 @@ class StepsActivity : AppCompatActivity(), StepsView.Callback, MakerBottomSheet.
                     .setIconCompleted(R.drawable.tkup_completed_step)
                     .setLineCompletedColor(R.color.dark)
                     .setLineUncompletedColor(R.color.light_black)
-                    .setSelectedSize(R.dimen.step_size_select)
+                    .setSelectedSize(R.dimen.step_size)
                     .setSize(R.dimen.step_size)
                     .setLineThickness(R.dimen.step_line_thickness)
                     .setIsTouchable(true)
@@ -78,6 +78,7 @@ class StepsActivity : AppCompatActivity(), StepsView.Callback, MakerBottomSheet.
                     .setStepsCount(4)
                     .setCurrentIndex(0)
                     .setCallback(this)
+                    .setLineMargins(R.dimen.dimen_16)
                     .build()
             )
         }
