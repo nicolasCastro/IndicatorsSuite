@@ -31,6 +31,7 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
                 shownUncompletedResource = getBoolean(R.styleable.StepsView_shownUncompletedResource, true)
                 isTouchable = getBoolean(R.styleable.StepsView_isTouchable, true)
                 keepCompletedSize = getBoolean(R.styleable.StepsView_keepCompletedSize, false)
+                lineMargins = getDimensionPixelSize(R.styleable.StepsView_lineMargins, getDefaultDimen(context, R.dimen.step_line_margins))
                 stepTextSize = getDimension(R.styleable.StepsView_stepTextSize, getDefaultFloatDimen(context, R.dimen.step_text_size))
                 stepTextFont = getResourceId(R.styleable.StepsView_stepTextFont, -1)
             }
@@ -80,5 +81,7 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
     var stepTextSize: Float
         internal set
     var stepTextFont: Int
+        internal set
+    var lineMargins: Int
         internal set
 }

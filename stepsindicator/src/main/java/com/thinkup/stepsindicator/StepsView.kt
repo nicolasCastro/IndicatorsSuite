@@ -213,6 +213,11 @@ class StepsView(context: Context, attributeSet: AttributeSet? = null) : FrameLay
             return this
         }
 
+        fun setLineMargins(@DimenRes size: Int): Builder {
+            config.lineMargins = config.getDefaultDimen(context, size)
+            return this
+        }
+
         fun setShownCompetedIcon(show: Boolean): Builder {
             config.shownCompletedIcon = show
             return this

@@ -40,11 +40,25 @@ class StepItem(context: Context, attrs: AttributeSet? = null, private val config
         tkupStepsItemContainer.layoutParams.toLinear().weight = STEP_FACTOR.toFloat()
         tkupStepsProgressContainer.weightSum = STEP_FACTOR.toFloat()
         when {
-            isFirst -> tkupStepsProgressContainer.setMargins(left = config.size / 2)
-            isLast -> {
-                tkupStepsProgressContainer.setMargins(right = config.selectedSize - (config.size / 2))
-                tkupStepsProgressContainer.layoutParams.width = config.size / 2
+            isFirst -> {
+                tkupStepsProgressContainer.setMargins(
+                    left = (config.size / 2) + config.lineMargins,
+                    right = config.lineMargins - (config.size / 2)
+                )
             }
+            isLast -> {
+                if (config.lineMargins == 0) {
+                    tkupStepsProgressContainer.setMargins(
+                        right = config.selectedSize - (config.size / 2),
+                        left = (config.size / 2) + config.lineMargins
+                    )
+                    tkupStepsProgressContainer.layoutParams.width = config.size / 2
+                } else tkupStepsProgressContainer.isVisible = false
+            }
+            else -> tkupStepsProgressContainer.setMargins(
+                left = (config.size / 2) + config.lineMargins,
+                right = config.lineMargins - (config.size / 2)
+            )
         }
         fromScaleX = config.size.toFloat()
         toScaleX = config.selectedSize.toFloat()
