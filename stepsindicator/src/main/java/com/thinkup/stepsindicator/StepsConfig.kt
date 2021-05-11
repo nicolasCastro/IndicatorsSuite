@@ -31,12 +31,17 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
                 shownUncompletedResource = getBoolean(R.styleable.StepsView_shownUncompletedResource, true)
                 isTouchable = getBoolean(R.styleable.StepsView_isTouchable, true)
                 keepCompletedSize = getBoolean(R.styleable.StepsView_keepCompletedSize, false)
+                stepTextSize = getDimension(R.styleable.StepsView_stepTextSize, getDefaultFloatDimen(context, R.dimen.step_text_size))
+                stepTextFont = getResourceId(R.styleable.StepsView_stepTextFont, -1)
             }
         }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     fun getDefaultDimen(context: Context, id: Int): Int = context.resources.getDimensionPixelSize(id)
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
+    fun getDefaultFloatDimen(context: Context, id: Int): Float = context.resources.getDimension(id)
 
     var uncompletedColor: Int
         internal set
@@ -71,5 +76,9 @@ class StepsConfig(context: Context, attrs: AttributeSet? = null) {
     var isTouchable: Boolean
         internal set
     var keepCompletedSize: Boolean
+        internal set
+    var stepTextSize: Float
+        internal set
+    var stepTextFont: Int
         internal set
 }

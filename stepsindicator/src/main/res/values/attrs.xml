@@ -20,5 +20,7 @@
         <attr name="shownUncompletedResource" format="boolean" />
         <attr name="isTouchable" format="boolean" />
         <attr name="keepCompletedSize" format="boolean" />
+        <attr name="stepTextSize" format="dimension"/>
+        <attr name="stepTextFont" format="reference"/>
     </declare-styleable>
 </resources>
