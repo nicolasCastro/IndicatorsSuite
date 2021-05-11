@@ -60,6 +60,8 @@ You could create and customize a **StepView** in both ways, in design view and p
                 app:stepTextCompletedColor="@color/colorAccent"
                 app:stepTextUncompletedColor="@color/colorPrimaryDark"
                 app:stepUncompletedColor="@color/colorAccent"
+                app:stepTextFont="@font/custom_font"
+                app:stepTextSize="18sp"
                 app:animationDuration="350"
                 app:isTouchable="true"
                 app:stepsCount="3" />
@@ -73,6 +75,8 @@ StepsView.Builder(requireContext())
             .setUncompletedColor(R.color.blue)
             .setTextCompletedColor(R.color.yellow)
             .setTextUncompletedColor(R.color.yellow)
+            .setTextSize(R.dimen_18sp)
+            .setTextFont(R.font.custom_font)
             .setIconCompleted(R.drawable.tkup_completed_step)
             .setLineCompletedColor(R.color.green)
             .setLineUncompletedColor(R.color.blue)
@@ -95,6 +99,8 @@ StepsView.Builder(requireContext())
   <tr><td>Uncompleted color</td>      <td><code>app:stepUncompletedColor</code></td>     <td><code>.setUncompletedColor</code></td>     <td>Any color resource</td></tr>
   <tr><td>Uncompleted Text color</td>     <td><code>app:stepTextUncompletedColor</code></td>     <td><code>.setTextCompletedColor</code></td>     <td>Any color resource</td></tr>
   <tr><td>Selected/completed Text color</td>      <td><code>app:stepTextCompletedColor</code></td>     <td><code>.setTextUncompletedColor</code></td>     <td>Any color resource</td></tr>
+<tr><td>Text font</td>      <td><code>app:stepTextFont</code></td>     <td><code>.setTextFont</code></td>     <td>Any font resource</td></tr>
+<tr><td>Text size</td>      <td><code>app:stepTextSize</code></td>     <td><code>.setTextSize</code></td>     <td>Any dimen resource</td></tr>
   <tr><td>Complete Icon resource</td>      <td><code>app:stepIconCompleted</code></td>     <td><code>.setIconCompleted</code></td>     <td>Any drawable resource</td></tr>
   <tr><td>Completed Line color</td>     <td><code>app:stepProgressLineCompletedColor</code></td>     <td><code>.setLineCompletedColor</code></td>     <td>Any color resource</td></tr>
   <tr><td>Unompleted Line color</td>      <td><code>app:stepProgressLineUncompletedColor</code></td>     <td><code>.setLineUncompletedColor</code></td>     <td>Any color resource</td></tr>
